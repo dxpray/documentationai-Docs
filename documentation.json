@@ -29,7 +29,8 @@
             "group": "How Rose Works",
             "icon": "sparkles",
             "pages": [
-              { "title": "How Rose Works", "path": "how-rose-works", "icon": "sparkles" }
+              { "title": "How Rose Works", "path": "how-rose-works", "icon": "sparkles" },
+              { "title": "Rose's Capabilities", "path": "rose-capabilities", "icon": "wand-sparkles" }
             ]
           },
           {

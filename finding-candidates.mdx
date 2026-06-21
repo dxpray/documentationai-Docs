@@ -3,11 +3,13 @@ title: Finding Candidates
 description: Two ways to find candidates — Rose AI search and Manual Filters — both drawing from the same 800M+ profile database.
 ---
 
-Hiros gives you two ways to find candidates: Rose AI search and Manual Filters. Both draw from the same 800M+ profile database.
+Hiros gives you two ways to find candidates: Rose AI search and Manual Filters. Both draw from the same 800M+ profile database. Rose AI search is the fastest path and where Rose is at her most powerful; Manual Filters give you precise, hands-on control when you want it.
 
 ## Rose AI Search
 
-Rose AI search is the fastest way to find candidates. Rather than setting filters manually, you simply describe who you're looking for in natural language — the same way you'd brief a recruiter.
+Rose AI search is the fastest way to find candidates. Rather than setting filters manually, you simply describe who you're looking for in natural language — the same way you'd brief a recruiter — and Rose does the research for you.
+
+Under the hood, Rose treats your brief as a problem to work, not a query to run. She'll clarify what's ambiguous, figure out which companies your ideal candidate works at today, size the talent pool before committing, retrieve real profiles, and judge each one against what you care about — then hand you curated packages. It typically takes her a single message to go from brief to a shortlist worth reviewing.
 
 ### Starting a Search
 
@@ -23,9 +25,28 @@ Type a description of the role and candidate you're looking for. You can be as s
 
 Rose will process your request and return one or more **Candidate Packages**.
 
+### What Rose does behind the scenes
+
+When you send a brief, Rose works it in steps rather than firing off a single search:
+
+<Steps>
+  <Step title="Clarifies the brief" icon="message-square">
+    If anything is ambiguous, Rose asks a focused question — often with tappable suggestions — or proposes a few candidate archetypes for you to choose between.
+  </Step>
+  <Step title="Finds the right companies" icon="building-2">
+    Rose identifies the companies your ideal hire works at today — competitors, adjacent players, and alumni networks — to use as high-signal starting points.
+  </Step>
+  <Step title="Sizes the pool first" icon="eye">
+    Before committing, Rose can preview a search angle — the pool size plus its top companies and titles — so she can refine the approach before retrieving profiles.
+  </Step>
+  <Step title="Retrieves and judges profiles" icon="user-check">
+    Rose pulls real profiles and runs a quick judgement pass against your must-haves, noting evidence and gaps for each candidate.
+  </Step>
+</Steps>
+
 ### Understanding Candidate Packages
 
-Each Candidate Package is a curated group of candidates that matches a particular interpretation of your brief. Packages are labelled descriptively (e.g. "AEs at NY tech startups, 3–5 years experience") so you can quickly assess their relevance.
+Each Candidate Package is a curated group of candidates that matches a particular interpretation of your brief. Packages are labelled descriptively (e.g. "AEs at NY tech startups, 3–5 years experience") so you can quickly assess their relevance. Rose often returns two or three packages representing different valid reads of your brief — so you can compare directions instead of second-guessing a single list.
 
 Each package shows:
 
@@ -34,7 +55,18 @@ Each package shows:
 - An **Open all** link to view the full package
 - An **Add [n]** button to add the entire package to a sequence in one click
 
-You can continue the conversation with Rose to refine results — ask her to narrow down by location, adjust seniority, focus on specific companies, and so on.
+<Callout kind="tip">
+  **The experience number is smarter than it looks.** Rose recomputes each candidate's *relevant* years of experience — counting only post-graduation, in-function work and excluding internships, student jobs, and unrelated roles. It reflects experience that actually matters for your role, not a raw LinkedIn total.
+</Callout>
+
+### Refining results in conversation
+
+Because the search lives in a chat, you can steer Rose the way you would a colleague:
+
+- Ask her to **narrow** by location, seniority, or specific companies.
+- Tell her what you **liked and didn't like**, and she'll iterate on the next set.
+- Ask her to **filter a package** — cap candidates per company, exclude certain employers, or set a minimum experience bar.
+- Ask her to **reveal more** from a package's reserve when you need extra volume.
 
 <Callout kind="warning">
   Rose is AI and can make mistakes. Always review profiles before adding them to a sequence.
