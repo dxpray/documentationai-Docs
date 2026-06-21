@@ -22,38 +22,41 @@
             "group": "Getting Started",
             "icon": "rocket",
             "pages": [
-              {
-                "title": "Introduction",
-                "path": "introduction",
-                "icon": "home"
-              },
-              {
-                "title": "Quickstart",
-                "path": "quickstart",
-                "icon": "zap"
-              }
+              { "title": "Getting Started", "path": "getting-started", "icon": "play" },
+              { "title": "How Rose Works", "path": "how-rose-works", "icon": "sparkles" }
             ]
           },
           {
-            "group": "Core Concepts",
-            "icon": "compass",
+            "group": "Finding & Engaging Candidates",
+            "icon": "users",
             "pages": [
-              {
-                "title": "How Rose Works",
-                "path": "how-rose-works",
-                "icon": "file-text"
-              }
+              { "title": "Finding Candidates", "path": "finding-candidates", "icon": "search" },
+              { "title": "Sequences", "path": "sequences", "icon": "send" },
+              { "title": "Sequence Analytics", "path": "sequence-analytics", "icon": "bar-chart-2" }
             ]
           },
           {
-            "group": "Configuration",
+            "group": "Conversations & Interviews",
+            "icon": "message-circle",
+            "pages": [
+              { "title": "Inbox", "path": "inbox", "icon": "inbox" },
+              { "title": "Booking Interviews", "path": "booking-interviews", "icon": "calendar" }
+            ]
+          },
+          {
+            "group": "Setup & Administration",
             "icon": "settings",
             "pages": [
-              {
-                "title": "Configuration",
-                "path": "configuration",
-                "icon": "sliders"
-              }
+              { "title": "Integrations", "path": "integrations", "icon": "plug" },
+              { "title": "Multi-User Management", "path": "multi-user-management", "icon": "user-cog" },
+              { "title": "Billing & Subscription", "path": "billing-and-subscription", "icon": "credit-card" }
+            ]
+          },
+          {
+            "group": "Resources",
+            "icon": "book-open",
+            "pages": [
+              { "title": "Tips & Tricks", "path": "tips-and-tricks", "icon": "lightbulb" }
             ]
           }
         ]
@@ -73,20 +76,13 @@
         "tab": "Help Center",
         "icon": "help-circle",
         "pages": [
-          {
-            "title": "Help Center",
-            "path": "help-center",
-            "icon": "home"
-          },
+          { "title": "Help Center", "path": "help-center", "icon": "home" },
           {
             "group": "FAQs",
             "icon": "help-circle",
             "expandable": false,
             "pages": [
-              {
-                "title": "Getting Started FAQ",
-                "path": "help-center/faq/getting-started"
-              }
+              { "title": "Getting Started FAQ", "path": "help-center/faq/getting-started" }
             ]
           },
           {
@@ -94,10 +90,7 @@
             "icon": "alert-triangle",
             "expandable": false,
             "pages": [
-              {
-                "title": "Login Issues",
-                "path": "help-center/troubleshooting/login-issues"
-              }
+              { "title": "Login Issues", "path": "help-center/troubleshooting/login-issues" }
             ]
           },
           {
@@ -105,10 +98,7 @@
             "icon": "book-open",
             "expandable": false,
             "pages": [
-              {
-                "title": "Schedule Interview",
-                "path": "help-center/guides/schedule-interview"
-              }
+              { "title": "Schedule Interview", "path": "help-center/guides/schedule-interview" }
             ]
           }
         ]
@@ -117,11 +107,7 @@
         "tab": "Changelog",
         "icon": "clock",
         "pages": [
-          {
-            "title": "Release History",
-            "path": "changelog",
-            "icon": "history"
-          }
+          { "title": "Release History", "path": "changelog", "icon": "history" }
         ]
       }
     ]
