@@ -22,41 +22,77 @@
             "group": "Getting Started",
             "icon": "rocket",
             "pages": [
-              { "title": "Getting Started", "path": "getting-started", "icon": "play" },
+              { "title": "Getting Started", "path": "getting-started", "icon": "play" }
+            ]
+          },
+          {
+            "group": "How Rose Works",
+            "icon": "sparkles",
+            "pages": [
               { "title": "How Rose Works", "path": "how-rose-works", "icon": "sparkles" }
             ]
           },
           {
-            "group": "Finding & Engaging Candidates",
-            "icon": "users",
+            "group": "Finding Candidates",
+            "icon": "search",
             "pages": [
-              { "title": "Finding Candidates", "path": "finding-candidates", "icon": "search" },
-              { "title": "Sequences", "path": "sequences", "icon": "send" },
+              { "title": "Finding Candidates", "path": "finding-candidates", "icon": "search" }
+            ]
+          },
+          {
+            "group": "Sequences",
+            "icon": "send",
+            "pages": [
+              { "title": "Sequences", "path": "sequences", "icon": "send" }
+            ]
+          },
+          {
+            "group": "Sequence Analytics",
+            "icon": "bar-chart-2",
+            "pages": [
               { "title": "Sequence Analytics", "path": "sequence-analytics", "icon": "bar-chart-2" }
             ]
           },
           {
-            "group": "Conversations & Interviews",
-            "icon": "message-circle",
+            "group": "Booking Interviews",
+            "icon": "calendar",
             "pages": [
-              { "title": "Inbox", "path": "inbox", "icon": "inbox" },
               { "title": "Booking Interviews", "path": "booking-interviews", "icon": "calendar" }
             ]
           },
           {
-            "group": "Setup & Administration",
-            "icon": "settings",
+            "group": "Inbox",
+            "icon": "inbox",
             "pages": [
-              { "title": "Integrations", "path": "integrations", "icon": "plug" },
-              { "title": "Multi-User Management", "path": "multi-user-management", "icon": "user-cog" },
-              { "title": "Billing & Subscription", "path": "billing-and-subscription", "icon": "credit-card" }
+              { "title": "Inbox", "path": "inbox", "icon": "inbox" }
             ]
           },
           {
-            "group": "Resources",
-            "icon": "book-open",
+            "group": "Integrations",
+            "icon": "plug",
+            "pages": [
+              { "title": "Integrations", "path": "integrations", "icon": "plug" }
+            ]
+          },
+          {
+            "group": "Tips & Tricks",
+            "icon": "lightbulb",
             "pages": [
               { "title": "Tips & Tricks", "path": "tips-and-tricks", "icon": "lightbulb" }
+            ]
+          },
+          {
+            "group": "Multi-User Management",
+            "icon": "users",
+            "pages": [
+              { "title": "Multi-User Management", "path": "multi-user-management", "icon": "user-cog" }
+            ]
+          },
+          {
+            "group": "Billing & Subscription",
+            "icon": "credit-card",
+            "pages": [
+              { "title": "Billing & Subscription", "path": "billing-and-subscription", "icon": "credit-card" }
             ]
           }
         ]
