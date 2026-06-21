@@ -1,0 +1,71 @@
+---
+title: Tips & Tricks
+description: Best practices for getting the most out of Rose, the manual search filters, and Boolean search operators.
+---
+
+Get the most out of Rose and the search tools with these best practices.
+
+## Rose AI Search Tips
+
+**Be specific, but conversational.** Rose responds well to natural language that describes the role clearly. Include seniority, location, industry, and any non-negotiables upfront.
+
+> Good: *"I need a founding AE with 4+ years B2B SaaS experience, based in London or remote UK"*
+>
+> Less effective: *"sales person"*
+
+**Use follow-up prompts to refine.** If Rose's first packages aren't quite right, continue the conversation — tell her what you liked and what to change. She'll iterate on her results.
+
+**Review multiple packages.** Rose often returns two or more candidate packages with different interpretations of your brief. Each represents a different candidate profile worth considering.
+
+**Check the reserve.** Each package shows candidates "in reserve" beyond the initial 25. If the first batch doesn't produce enough interviews, ask Rose to show you more from the same package.
+
+## Manual Filter Tips
+
+**Start broad, then narrow.** Begin with one or two filters (e.g. role title and location) and watch how the match count changes as you add more. Adding all filters at once can result in a pool that's too small to be useful.
+
+**Prioritise essential criteria first.** Focus on the must-haves (geography, job title) before adding nice-to-haves (specific skills, education). This helps you understand the size of the core market before constraining it.
+
+**Use the Company filter strategically.** Targeting candidates from specific companies is one of the most reliable signals of relevant experience. If you're hiring for a specific vertical, compile a list of the leading companies in that space and enter them into the Company filter. Candidates from those firms are likely to have exactly the background you need.
+
+**Use the engagement signals.** The "Recently changed jobs", "Posts on LinkedIn", and "In the news" toggles in the Skills & Keywords filter can significantly improve response rates — candidates who are active or have recently moved roles are often more open to new opportunities.
+
+**Adapt to your industry.** Some industries use specific job titles, accreditations, or keywords that don't appear in profiles from other sectors. Bear this in mind when configuring your filters — a keyword that's standard in one field may not appear in another.
+
+## Boolean Search
+
+The Skills & Keywords and Role & Title filters support Boolean search operators. These allow you to build more precise, flexible queries.
+
+**Simple searches — no brackets needed.** When searching within a single category, list terms with OR between them:
+
+```text
+VP OR "vice president" OR EVP OR SVP
+```
+
+```text
+sales OR AE OR "account executive" OR BD OR "business development"
+```
+
+**Use quotation marks for multi-word phrases.** Without quotes, each word is treated independently. Use quotes to search for an exact phrase:
+
+```text
+✓  AE OR "account executive"
+✗  AE OR account executive   (this searches for AE, or account, or executive — not the same thing)
+```
+
+**Use brackets when combining two categories.** Wrap each group in brackets and join with AND:
+
+```text
+(manager) AND (sales OR account OR BD OR "business development")
+```
+
+```text
+(manager OR lead OR senior) AND (sales OR account OR BD OR "business development")
+```
+
+This surfaces results like *sales lead*, *BD manager*, or *senior account* — combinations you might not have typed individually.
+
+**The same logic applies to skills searches:**
+
+```text
+("javascript" OR JS) AND (python OR python3)
+```
