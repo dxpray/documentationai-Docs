@@ -1,0 +1,41 @@
+---
+title: Boolean Search
+description: Use AND, OR, quotation marks, and parentheses to build precise, flexible search queries.
+---
+
+The Role & Title, Keywords, and Company filters support Boolean operators, which let you build more precise and flexible queries.
+
+## Simple searches — no brackets needed
+
+When searching within a single category, list terms with `OR` between them:
+
+```
+VP OR "vice president" OR EVP OR SVP
+```
+
+```
+sales OR AE OR "account executive" OR BD OR "business development"
+```
+
+## Use quotation marks for multi-word phrases
+
+Without quotes, each word is treated independently. Use quotes for an exact phrase:
+
+```
+✓  AE OR "account executive"
+✗  AE OR account executive   (searches for AE, or account, or executive)
+```
+
+## Use brackets to combine categories
+
+Wrap each group in brackets and join with `AND`:
+
+```
+(manager OR lead OR senior) AND (sales OR account OR BD OR "business development")
+```
+
+This surfaces results like *sales lead*, *BD manager*, or *senior account* — combinations you might not type individually. The same logic applies to skills:
+
+```
+("javascript" OR JS) AND (python OR python3)
+```
