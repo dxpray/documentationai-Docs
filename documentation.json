@@ -2,10 +2,14 @@
   "name": "Hiros",
   "colors": {
     "light": {
-      "brand": "#874d68"
+      "brand": "#D05447",
+      "heading": "#2B2A29",
+      "text": "#2B2A29"
     },
     "dark": {
-      "brand": "#C982A3"
+      "brand": "#D05447",
+      "heading": "#F8F6F3",
+      "text": "#CCC5BB"
     }
   },
   "navigation": {
@@ -121,5 +125,9 @@
         ]
       }
     ]
-  }
+  },
+  "template": "classic",
+  "logo-dark": "https://blob-cdn.documentation.ai/org-6838a7a8-9bb8-4a3f-bda5-450ea34dc262/doc-c7e6ca58-4630-4814-b064-42b77b2b78ad/1782062185084-letj5cl6hi-hiros-gradient-logo.hiros-gradient-logo?fm=auto&auto=compress%2Cformat",
+  "favicon": "https://blob-cdn.documentation.ai/org-6838a7a8-9bb8-4a3f-bda5-450ea34dc262/doc-c7e6ca58-4630-4814-b064-42b77b2b78ad/1782062185084-letj5cl6hi-hiros-gradient-logo.hiros-gradient-logo?fm=auto&auto=compress%2Cformat",
+  "logo-light": "https://blob-cdn.documentation.ai/org-6838a7a8-9bb8-4a3f-bda5-450ea34dc262/doc-c7e6ca58-4630-4814-b064-42b77b2b78ad/1782062185084-letj5cl6hi-hiros-gradient-logo.hiros-gradient-logo?fm=auto&auto=compress%2Cformat"
 }
