@@ -1,86 +1,29 @@
 ---
 title: Sequences
-description: Sequences are how Rose reaches out to your selected candidates — each tied to a role, containing the outreach emails, job details, and pipeline tracking.
+description: Sequences are how Rose reaches out to your candidates — one per role, holding the job details, outreach emails, and pipeline for that hire.
 ---
 
-Sequences are how Rose reaches out to your selected candidates. Each sequence is tied to a specific role and contains all the outreach emails, job details, and pipeline tracking for that hire.
+A **Sequence** holds everything Rose needs to source and reach out for one role — the job details, the outreach emails, and the pipeline of candidates for that hire. Click **Sequences** in the left sidebar to see them all.
 
-## The Sequences Page
+## In this section
 
-Click **Sequences** in the left sidebar to see all your sequences. The overview shows:
+- **[Creating a Sequence](/sequences/creating-a-sequence)** — the three-step setup, including uploading a job description.
+- **[Managing a Sequence](/sequences/managing-a-sequence)** — the tabs inside a sequence and how the candidate pipeline flows.
+- **[The Outreach Emails](/sequences/outreach-emails)** — the three-email sequence Rose sends, and how to edit it.
+- **[Sequence Statuses](/sequences/sequence-statuses)** — what Draft, In Progress, Completed, and the rest mean.
 
-- **Active** — number of sequences currently in progress
-- **Reply Rate** — percentage of contacted candidates who have replied across all sequences
-- **Interviews Booked** — total interviews booked
+## The Sequences page
 
-Each row in the table shows the sequence name, creator, location, reply count, interview count, and current status.
+The page opens with **Your Sequences** and three headline stats across the top:
 
-## Creating a New Sequence
+| Stat | What it shows |
+| :---- | :---- |
+| **Active** | How many sequences are currently in progress |
+| **Reply rate** | The share of contacted candidates who have replied |
+| **Interviews booked** | Total interviews booked across your sequences |
 
-Click **+ New Sequence** in the top right. You'll be guided through three steps:
-
-<Steps>
-  <Step title="The Position" icon="briefcase">
-    Enter the Campaign Title (internal only — not shared with candidates), Job Title, Company Name, and a description of the role and company.
-  </Step>
-  <Step title="Work Arrangement" icon="map-pin">
-    Select the employment type (full-time, part-time, contract), work policy (remote, hybrid, on-site), and location.
-  </Step>
-  <Step title="Role Details" icon="file-text">
-    Add compensation details, key responsibilities, and what you're looking for in a candidate. You can also upload a job description to auto-populate these fields.
-  </Step>
-</Steps>
+Below that, each sequence appears as a row showing its name, creator, location, reply count, interview count, and current status. Use the **Filter** control to view by status, and **New Sequence** (top right) to start a new one.
 
 <Callout kind="tip">
-  The more detail you provide, the better Rose's outreach emails will be. Candidates Rose engages may not be actively job hunting — a compelling, specific description of the opportunity is what converts them.
+  New to Hiros? The Sequences page walks you through the flow: **JD → Brief → Sourcing → Outreach**. Set up a sequence first, and your candidate shortlists get sharper.
 </Callout>
-
-## Sequence Statuses
-
-| Status | Description |
-| :---- | :---- |
-| **Draft** | Created but not yet launched. You can still edit all details. |
-| **In Progress** | The sequence is live. Candidates are receiving emails. |
-| **Completed** | All candidates have received all emails in the sequence. Rose will still notify you if a completed-sequence candidate replies. |
-
-Cancelling a sequence does not restore used candidate or email credits, depending on your plan.
-
-## Adding Candidates to a Sequence
-
-You can add candidates to a sequence at any point — before or after creating it. From the Rose AI search or Manual Filters results, select candidates and choose which sequence to add them to.
-
-## Managing a Sequence
-
-From within a sequence, you can access five tabs:
-
-- **Pipeline** — a full list of all candidates in the sequence, showing their current role, stage (Replied, Interested, Not interested, etc.), and last activity timestamp.
-- **Interviews booked** — all interviews that have been scheduled with candidates from this sequence.
-- **Outreach** — the three-email sequence Rose will send (or has sent) to candidates. You can view and edit the email copy here before launching.
-- **Job Details** — the role information you entered during setup, plus the **Reply Automation** setting.
-- **ATS Integration** — push candidates directly to your connected ATS from within the sequence.
-
-## The Outreach Emails
-
-Rose generates a personalised three-touch email sequence based on your job details:
-
-- **Email 1 — Initial Outreach** — introduces Rose, explains why she's reaching out, and pitches the opportunity
-- **Email 2 — Follow-up** — a shorter follow-up sent a few days later
-- **Email 3 — Final Follow-up** — a final, brief touchpoint
-
-Emails are sent over 6–7 days, excluding Sundays.
-
-Tokens like `{{firstName}}` are automatically personalised per candidate by Rose. The opening and closing sections of each email are managed by Rose and are not editable, as they are optimised for deliverability. The main body of each email can be edited to reflect your preferences.
-
-<Callout kind="warning">
-  When editing email copy, avoid hype language ("revolutionary", "game-changing", "once-in-a-lifetime") and urgency or pressure tactics ("last chance", "urgent response needed"). These patterns reduce email deliverability and candidate response rates.
-</Callout>
-
-## Reply Automation
-
-Found in the **Job Details** tab of each sequence, Reply Automation controls how Rose handles candidate replies:
-
-- **Rose replies automatically** — Rose manages the full conversation end-to-end, escalating only genuinely complex situations to you
-- **Rose drafts, you approve** — Rose drafts every reply, but nothing is sent until you approve it in the Inbox
-- **You reply yourself** — Rose stays silent; you take over all replies manually
-
-You can change this setting at any time, even after a sequence has launched.
