@@ -22,108 +22,276 @@
             "group": "Getting Started",
             "icon": "rocket",
             "pages": [
-              { "title": "Getting Started", "path": "getting-started", "icon": "play" },
-              { "title": "Create an Account", "path": "getting-started/create-account", "icon": "user-plus" },
-              { "title": "Connect Your Calendar", "path": "getting-started/connect-calendar", "icon": "calendar" },
-              { "title": "Set Up Your Knowledge Base", "path": "getting-started/knowledge-base", "icon": "book-open" }
+              {
+                "title": "Getting Started",
+                "path": "getting-started",
+                "icon": "play"
+              },
+              {
+                "title": "Create an Account",
+                "path": "getting-started/create-account",
+                "icon": "user-plus"
+              },
+              {
+                "title": "Connect Your Calendar",
+                "path": "getting-started/connect-calendar",
+                "icon": "calendar"
+              },
+              {
+                "title": "Set Up Your Knowledge Base",
+                "path": "getting-started/knowledge-base",
+                "icon": "book-open"
+              }
             ]
           },
           {
             "group": "How Rose Works",
             "icon": "sparkles",
             "pages": [
-              { "title": "How Rose Works", "path": "how-rose-works", "icon": "sparkles" },
-              { "title": "The Four Roles Rose Plays", "path": "how-rose-works/the-four-roles", "icon": "users" },
-              { "title": "Your Level of Control", "path": "how-rose-works/levels-of-control", "icon": "sliders" },
-              { "title": "Rose's Capabilities", "path": "rose-capabilities", "icon": "wand-sparkles" }
+              {
+                "title": "How Rose Works",
+                "path": "how-rose-works",
+                "icon": "sparkles"
+              },
+              {
+                "title": "The Four Roles Rose Plays",
+                "path": "how-rose-works/the-four-roles",
+                "icon": "users"
+              },
+              {
+                "title": "Your Level of Control",
+                "path": "how-rose-works/levels-of-control",
+                "icon": "sliders"
+              },
+              {
+                "title": "Rose's Capabilities",
+                "path": "rose-capabilities",
+                "icon": "wand-sparkles"
+              }
             ]
           },
           {
             "group": "Finding Candidates",
             "icon": "search",
             "pages": [
-              { "title": "Finding Candidates", "path": "finding-candidates", "icon": "search" },
-              { "title": "Rose AI Search", "path": "finding-candidates/rose-ai-search", "icon": "sparkles" },
-              { "title": "Manual Filters", "path": "finding-candidates/manual-filters", "icon": "sliders-horizontal" }
+              {
+                "title": "Finding Candidates",
+                "path": "finding-candidates",
+                "icon": "search"
+              },
+              {
+                "title": "Rose AI Search",
+                "path": "finding-candidates/rose-ai-search",
+                "icon": "sparkles"
+              },
+              {
+                "title": "Manual Filters",
+                "path": "finding-candidates/manual-filters",
+                "icon": "sliders-horizontal"
+              }
             ]
           },
           {
             "group": "Sequences",
             "icon": "send",
             "pages": [
-              { "title": "Sequences", "path": "sequences", "icon": "send" },
-              { "title": "Creating a Sequence", "path": "sequences/creating-a-sequence", "icon": "plus" },
-              { "title": "Managing a Sequence", "path": "sequences/managing-a-sequence", "icon": "list" },
-              { "title": "The Outreach Emails", "path": "sequences/outreach-emails", "icon": "mail" },
-              { "title": "Sequence Statuses", "path": "sequences/sequence-statuses", "icon": "tag" }
+              {
+                "title": "Sequences",
+                "path": "sequences",
+                "icon": "send"
+              },
+              {
+                "title": "Creating a Sequence",
+                "path": "sequences/creating-a-sequence",
+                "icon": "plus"
+              },
+              {
+                "title": "Managing a Sequence",
+                "path": "sequences/managing-a-sequence",
+                "icon": "list"
+              },
+              {
+                "title": "The Outreach Emails",
+                "path": "sequences/outreach-emails",
+                "icon": "mail"
+              },
+              {
+                "title": "Sequence Statuses",
+                "path": "sequences/sequence-statuses",
+                "icon": "tag"
+              }
             ]
           },
           {
             "group": "Sequence Analytics",
             "icon": "bar-chart-2",
             "pages": [
-              { "title": "Sequence Analytics", "path": "sequence-analytics", "icon": "bar-chart-2" },
-              { "title": "The Sequence Funnel", "path": "sequence-analytics/the-funnel", "icon": "filter" },
-              { "title": "Account-Level Stats", "path": "sequence-analytics/account-stats", "icon": "pie-chart" }
+              {
+                "title": "Sequence Analytics",
+                "path": "sequence-analytics",
+                "icon": "bar-chart-2"
+              },
+              {
+                "title": "The Sequence Funnel",
+                "path": "sequence-analytics/the-funnel",
+                "icon": "filter"
+              },
+              {
+                "title": "Account-Level Stats",
+                "path": "sequence-analytics/account-stats",
+                "icon": "pie-chart"
+              }
             ]
           },
           {
             "group": "Booking Interviews",
             "icon": "calendar",
             "pages": [
-              { "title": "Booking Interviews", "path": "booking-interviews", "icon": "calendar" },
-              { "title": "How Rose Books Interviews", "path": "booking-interviews/how-rose-books", "icon": "zap" },
-              { "title": "Booking Manually", "path": "booking-interviews/booking-manually", "icon": "hand" },
-              { "title": "The Bookings Page", "path": "booking-interviews/the-bookings-page", "icon": "calendar-check" }
+              {
+                "title": "Booking Interviews",
+                "path": "booking-interviews",
+                "icon": "calendar"
+              },
+              {
+                "title": "How Rose Books Interviews",
+                "path": "booking-interviews/how-rose-books",
+                "icon": "zap"
+              },
+              {
+                "title": "Booking Manually",
+                "path": "booking-interviews/booking-manually",
+                "icon": "hand"
+              },
+              {
+                "title": "The Bookings Page",
+                "path": "booking-interviews/the-bookings-page",
+                "icon": "calendar-check"
+              }
             ]
           },
           {
             "group": "Inbox",
             "icon": "inbox",
             "pages": [
-              { "title": "Inbox", "path": "inbox", "icon": "inbox" },
-              { "title": "How Rose Handles Replies", "path": "inbox/how-rose-handles-replies", "icon": "bot" },
-              { "title": "Managing Conversations", "path": "inbox/managing-conversations", "icon": "messages-square" }
+              {
+                "title": "Inbox",
+                "path": "inbox",
+                "icon": "inbox"
+              },
+              {
+                "title": "How Rose Handles Replies",
+                "path": "inbox/how-rose-handles-replies",
+                "icon": "bot"
+              },
+              {
+                "title": "Managing Conversations",
+                "path": "inbox/managing-conversations",
+                "icon": "messages-square"
+              }
             ]
           },
           {
             "group": "Integrations",
             "icon": "plug",
             "pages": [
-              { "title": "Integrations", "path": "integrations", "icon": "plug" },
-              { "title": "Scheduling", "path": "integrations/scheduling", "icon": "calendar" },
-              { "title": "Interview Preferences", "path": "integrations/interview-preferences", "icon": "settings" },
-              { "title": "Notifications", "path": "integrations/notifications", "icon": "bell" },
-              { "title": "Applicant Tracking (ATS)", "path": "integrations/applicant-tracking", "icon": "users" }
+              {
+                "title": "Integrations",
+                "path": "integrations",
+                "icon": "plug"
+              },
+              {
+                "title": "Scheduling",
+                "path": "integrations/scheduling",
+                "icon": "calendar"
+              },
+              {
+                "title": "Interview Preferences",
+                "path": "integrations/interview-preferences",
+                "icon": "settings"
+              },
+              {
+                "title": "Notifications",
+                "path": "integrations/notifications",
+                "icon": "bell"
+              },
+              {
+                "title": "Applicant Tracking (ATS)",
+                "path": "integrations/applicant-tracking",
+                "icon": "users"
+              }
             ]
           },
           {
             "group": "Tips & Tricks",
             "icon": "lightbulb",
             "pages": [
-              { "title": "Tips & Tricks", "path": "tips-and-tricks", "icon": "lightbulb" },
-              { "title": "Rose AI Search Tips", "path": "tips-and-tricks/rose-ai-search", "icon": "sparkles" },
-              { "title": "Manual Filter Tips", "path": "tips-and-tricks/manual-filters", "icon": "sliders-horizontal" },
-              { "title": "Boolean Search", "path": "tips-and-tricks/boolean-search", "icon": "code" }
+              {
+                "title": "Tips & Tricks",
+                "path": "tips-and-tricks",
+                "icon": "lightbulb"
+              },
+              {
+                "title": "Rose AI Search Tips",
+                "path": "tips-and-tricks/rose-ai-search",
+                "icon": "sparkles"
+              },
+              {
+                "title": "Manual Filter Tips",
+                "path": "tips-and-tricks/manual-filters",
+                "icon": "sliders-horizontal"
+              },
+              {
+                "title": "Boolean Search",
+                "path": "tips-and-tricks/boolean-search",
+                "icon": "code"
+              }
             ]
           },
           {
             "group": "Multi-User Management",
             "icon": "users",
             "pages": [
-              { "title": "Multi-User Management", "path": "multi-user-management", "icon": "user-cog" },
-              { "title": "Inviting Your Team", "path": "multi-user-management/inviting-your-team", "icon": "user-plus" },
-              { "title": "Roles & Permissions", "path": "multi-user-management/roles-and-permissions", "icon": "shield" },
-              { "title": "Organisation Settings", "path": "multi-user-management/organisation-settings", "icon": "building" }
+              {
+                "title": "Multi-User Management",
+                "path": "multi-user-management",
+                "icon": "user-cog"
+              },
+              {
+                "title": "Inviting Your Team",
+                "path": "multi-user-management/inviting-your-team",
+                "icon": "user-plus"
+              },
+              {
+                "title": "Roles & Permissions",
+                "path": "multi-user-management/roles-and-permissions",
+                "icon": "shield"
+              },
+              {
+                "title": "Organisation Settings",
+                "path": "multi-user-management/organisation-settings",
+                "icon": "building"
+              }
             ]
           },
           {
             "group": "Billing & Subscription",
             "icon": "credit-card",
             "pages": [
-              { "title": "Billing & Subscription", "path": "billing-and-subscription", "icon": "credit-card" },
-              { "title": "Credits", "path": "billing-and-subscription/credits", "icon": "coins" },
-              { "title": "Subscription Plans", "path": "billing-and-subscription/plans", "icon": "credit-card" }
+              {
+                "title": "Billing & Subscription",
+                "path": "billing-and-subscription",
+                "icon": "credit-card"
+              },
+              {
+                "title": "Credits",
+                "path": "billing-and-subscription/credits",
+                "icon": "coins"
+              },
+              {
+                "title": "Subscription Plans",
+                "path": "billing-and-subscription/plans",
+                "icon": "credit-card"
+              }
             ]
           }
         ]
@@ -134,7 +302,6 @@
         "groups": [
           {
             "group": "Endpoints",
-            "openapi": "api-reference/openapi.yaml",
             "pages": []
           }
         ]
@@ -143,13 +310,20 @@
         "tab": "Help Center",
         "icon": "help-circle",
         "pages": [
-          { "title": "Help Center", "path": "help-center", "icon": "home" },
+          {
+            "title": "Help Center",
+            "path": "help-center",
+            "icon": "home"
+          },
           {
             "group": "FAQs",
             "icon": "help-circle",
             "expandable": false,
             "pages": [
-              { "title": "Getting Started FAQ", "path": "help-center/faq/getting-started" }
+              {
+                "title": "Getting Started FAQ",
+                "path": "help-center/faq/getting-started"
+              }
             ]
           },
           {
@@ -157,7 +331,10 @@
             "icon": "alert-triangle",
             "expandable": false,
             "pages": [
-              { "title": "Login Issues", "path": "help-center/troubleshooting/login-issues" }
+              {
+                "title": "Login Issues",
+                "path": "help-center/troubleshooting/login-issues"
+              }
             ]
           },
           {
@@ -165,7 +342,10 @@
             "icon": "book-open",
             "expandable": false,
             "pages": [
-              { "title": "Schedule Interview", "path": "help-center/guides/schedule-interview" }
+              {
+                "title": "Schedule Interview",
+                "path": "help-center/guides/schedule-interview"
+              }
             ]
           }
         ]
@@ -174,7 +354,11 @@
         "tab": "Changelog",
         "icon": "clock",
         "pages": [
-          { "title": "Release History", "path": "changelog", "icon": "history" }
+          {
+            "title": "Release History",
+            "path": "changelog",
+            "icon": "history"
+          }
         ]
       }
     ]
@@ -182,5 +366,15 @@
   "template": "classic",
   "logo-dark": "https://blob-cdn.documentation.ai/org-6838a7a8-9bb8-4a3f-bda5-450ea34dc262/doc-c7e6ca58-4630-4814-b064-42b77b2b78ad/1782062185084-letj5cl6hi-hiros-gradient-logo.hiros-gradient-logo?fm=auto&auto=compress%2Cformat",
   "favicon": "https://blob-cdn.documentation.ai/org-6838a7a8-9bb8-4a3f-bda5-450ea34dc262/doc-c7e6ca58-4630-4814-b064-42b77b2b78ad/1782062185084-letj5cl6hi-hiros-gradient-logo.hiros-gradient-logo?fm=auto&auto=compress%2Cformat",
-  "logo-light": "https://blob-cdn.documentation.ai/org-6838a7a8-9bb8-4a3f-bda5-450ea34dc262/doc-c7e6ca58-4630-4814-b064-42b77b2b78ad/1782062185084-letj5cl6hi-hiros-gradient-logo.hiros-gradient-logo?fm=auto&auto=compress%2Cformat"
+  "logo-light": "https://blob-cdn.documentation.ai/org-6838a7a8-9bb8-4a3f-bda5-450ea34dc262/doc-c7e6ca58-4630-4814-b064-42b77b2b78ad/1782062185084-letj5cl6hi-hiros-gradient-logo.hiros-gradient-logo?fm=auto&auto=compress%2Cformat",
+  "navbar": {
+    "actions": {
+      "links": [
+        {
+          "title": "Login",
+          "link": "https://clients.gethiros.com"
+        }
+      ]
+    }
+  }
 }
