@@ -1,37 +1,65 @@
 ---
-title: The Outreach Emails
-description: Rose writes a personalised three-touch email sequence for every role — here's what she sends and what you can edit.
+title: The Outreach Sequence
+description: Choose how outreach runs — email, LinkedIn, or both — then review every message Rose writes before anything sends.
 ---
 
-Rose generates a personalised three-email sequence based on your job details. You'll find it in the **Outreach** tab of each sequence, where every email is **personalised per candidate**.
+The outreach sequence is the series of steps Rose sends each candidate. You decide its **shape** — which channels, in what order, with what gaps — and Rose writes the messages, personalised for every candidate.
 
-## The three emails
+## Step 1 — Shape the sequence
 
-| Email | When it sends |
+Before Rose writes a word, she asks **How should the outreach run?** with a small builder.
+
+### Start from a template
+
+| Template | What it does |
 | :---- | :---- |
-| **Email 1 — Initial Outreach** | Sends first |
-| **Email 2 — Follow-up** | If there's no reply |
-| **Email 3 — Final Follow-up** | A final, brief touch |
+| **Email only** | Three emails, spaced out. No LinkedIn. |
+| **LinkedIn only** | An invite, a message once they accept, then an InMail. |
+| **LinkedIn first** | Meet them on LinkedIn, then follow up by email. |
+| **Email + LinkedIn** | An invite and a message on LinkedIn, then three emails. |
 
-Emails go out over several days during business hours, on a schedule you can see and adjust (days of the week, hours, and timezone) from the Outreach tab.
+Or choose **From a project** to reuse the shape of a sequence you've run before. It copies the steps and wait times — Rose still writes fresh messages for the new role.
 
-## Editing the copy
+### Adjust the steps
 
-Each email has an editable **subject** and **body**. Personalisation tokens such as `{{firstName}}` are filled in automatically for every candidate. Use **Generate Email Sequence** to have Rose draft the set, or regenerate at any point.
+Drag blocks in from the tray (**Drag in, or click to add**), reorder them, remove them, and change the wait before each one.
+
+| Block | What it sends |
+| :---- | :---- |
+| **Email** | An email from your connected mailbox |
+| **LinkedIn invite** | A connection request, with no note |
+| **LinkedIn message** | A direct message, sent once you're connected |
+| **InMail** | Reaches anyone, uses your InMail credits |
+
+Rose suggests what to add next — for example, a follow-up email for people who don't accept your invite. A few rules keep sequences sensible:
+
+- Only **one LinkedIn invite** can go out per person.
+- A LinkedIn message needs an invite before it. Anyone you aren't connected with gets an InMail instead.
+- A sequence has a minimum and a maximum number of steps; the builder tells you if you're outside them.
+
+When it looks right, click **Use this sequence**. The card shows **Sequence set**.
 
 <Callout kind="info">
-  The opening and closing of each email are managed by Rose and optimised for deliverability, so they aren't editable. The main body is yours to shape.
+  LinkedIn steps send from **your own** LinkedIn account. Connect it on the [Integrations](/integrations/linkedin) page first — Rose will prompt you if you haven't.
 </Callout>
 
-## Staying out of spam
+## Step 2 — Review the messages
 
-Rose runs a built-in **spam check** as you edit. If it finds risky words, it flags them as removable chips and offers **Fix all with Rose**. When you're clear, you'll see *“Spam check · you're in the clear.”*
+Rose then writes every step and shows you the sequence one tab per step. Open each step before approving — you can edit any subject or body inline, or click **Ask Rose to edit** and tell her what to change.
 
-When editing, avoid:
+- **Tokens** such as the candidate's first name are personalised by Rose for every recipient.
+- **Highlighted phrases** may hurt deliverability. Remove them yourself, or use **Fix all with Rose**. When you're clear you'll see *Spam check · you're in the clear.*
 
-- Hype language (“revolutionary”, “game-changing”, “once-in-a-lifetime”)
-- Urgency or pressure tactics (“last chance”, “urgent response needed”)
+When every step looks right, click **Approve**.
 
-These patterns reduce deliverability and response rates.
+<Callout kind="tip">
+  Avoid hype (“revolutionary”, “once-in-a-lifetime”) and pressure (“last chance”, “urgent”). They land in spam and depress reply rates.
+</Callout>
 
-When you launch, you'll get a final **Review your outreach** preview of all three emails before anything sends.
+## The Outreach tab
+
+Everything you approved lives on the project's **Outreach** tab, where you can review and edit the steps before launch.
+
+The **Sending schedule** sets the days, hours and timezone emails can go out. Rose paces sends gradually and pauses automatically if emails start bouncing. Changes to the schedule apply to a live project immediately.
+
+Rose stops a candidate's sequence as soon as they reply.

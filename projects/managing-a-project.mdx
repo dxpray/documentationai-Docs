@@ -1,41 +1,64 @@
 ---
-title: Managing a Sequence
-description: Inside a sequence you'll find tabs for your pipeline, bookings, outreach, job details, and ATS — plus a clear view of where every candidate stands.
+title: Managing a Project
+description: Inside a project you'll find the candidate pipeline, bookings, outreach and job details — plus a clear view of where every candidate stands.
 ---
 
-Open any sequence to manage it. The detail page shows the sequence title and status, an optional metrics bar, and a row of tabs.
+Open any project from the **Projects** page. The header shows its title and status, and a row of tabs underneath.
 
 ## The tabs
 
 | Tab | What's there |
 | :---- | :---- |
-| **Leads** | The full candidate pipeline, grouped by stage |
+| **Leads (CRM)** | The candidate pipeline, as a board or a list |
 | **Ready to Book** | Candidates who've shared availability and are ready for a call |
-| **Interviews booked** | Interviews already scheduled from this sequence |
-| **Job Details** | The role information you entered, plus the **Reply automation** setting |
-| **Outreach** | The emails Rose sends — view and edit before launching ([details](/sequences/outreach-emails)) |
-| **ATS Integration** | Push candidates to your connected ATS (shown if ATS is available on your plan) |
+| **Interviews booked** | Interviews already scheduled from this project |
+| **Outreach** | The sequence Rose sends — see [The Outreach Sequence](/projects/outreach-sequence) |
+| **Job Details** | The role details, plus the **Candidate replies** setting |
+| **ATS Integration** | Push candidates to your connected ATS (if your plan includes it) |
 
-## How the pipeline flows
+When Rose has reply drafts waiting for you, the tab bar shows how many — for example *2 drafts awaiting approval*.
 
-In the **Leads** tab, candidates are grouped by where they are in the journey. Each stage has a plain-English meaning:
+## The pipeline
 
-- **Sourced** — found by Rose; email lookup in progress.
-- **Contacted** — first email sent, waiting on a reply.
-- **Replied** — in conversation.
-- **Interested** — showed interest; Rose is moving them forward.
-- **Ready to book** — shared availability; pick a slot.
-- **Interviews booked** — interview confirmed on your calendar.
-- **Email not found** — no verified address; try LinkedIn instead.
-- **Not interested** — passed on the role.
-- **Rejected** — removed from this sequence.
+On **Leads (CRM)**, candidates are grouped by where they are in the journey:
 
-You can select candidates to remove or export them, and add more candidates to a sequence at any time — before or after launching — from [Rose AI Search](/finding-candidates/rose-ai-search) or [Manual Filters](/finding-candidates/manual-filters).
+| Stage | Meaning |
+| :---- | :---- |
+| **Shortlisted** | Added to this project — not contacted yet |
+| **In Outreach** | In the outreach sequence — no reply yet |
+| **Replied** | In conversation |
+| **Interested** | Showed interest — Rose is moving them forward |
+| **Ready to book** | Shared availability — pick a slot |
+| **Interviews booked** | Interview confirmed on your calendar |
+| **Email not found** | No verified address — try LinkedIn instead |
+| **Not interested** | Passed on the role |
+| **Rejected** | Removed from this project |
+
+Switch between **Comfortable**, **Compact** and **List** views — your choice is remembered. Use **Show stages** to hide stages you don't need.
+
+### Moving candidates
+
+Drag a card to another stage to update it. Moving someone out of outreach stops Rose's follow-ups to them; moving someone who has already engaged back into an outreach stage lets her resume. Rose asks you to confirm either way.
+
+To reject a candidate, choose **Reject & notify**. They move to **Rejected** and receive a polite decline email — you can add an optional note to it. Their conversation is archived in your Inbox.
+
+### Working with a candidate
+
+Click a candidate to open their profile over the pipeline. From there you can:
+
+- Read their full background and relevant years of experience.
+- See and edit their **Personalised intro** — the line Rose opens her outreach with — before it's sent.
+- **Enrich email & phone** to find their contact details.
+- Open their LinkedIn profile.
+
+### Bulk actions
+
+Select candidates to **Remove** them from the project or **Export** them to a spreadsheet. Exports are capped at a set number of candidates at a time; the app tells you if you go over.
+
+## Adding more candidates
+
+You can add candidates at any time — before launch or while the project is running — by asking Rose in the project's chat, pulling more from your [calibrated search](/finding-candidates/calibration), or using [Manual Filters](/finding-candidates/manual-filters). If a completed project gets new candidates, it resumes so they receive the sequence too.
 
 ## Launching
 
-A draft sequence shows a **Launch sequence** button. Rose recommends having 10 or more candidates before you launch. You'll review the outreach emails and pick a [reply-automation mode](/how-rose-works/levels-of-control) before going live.
-
-<Callout kind="info">
-  Reply automation lives in the **Job Details** tab and can be changed any time, even after launch.
-</Callout>
+A draft project shows a **Launch project** button above the pipeline. You need at least one contactable candidate; Rose recommends ten or more. See [Launching a Project](/projects/launching) for the full flow.

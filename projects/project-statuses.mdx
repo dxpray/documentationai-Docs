@@ -1,19 +1,32 @@
 ---
-title: Sequence Statuses
-description: What each sequence status means — from Draft through In Progress to Completed.
+title: Project Statuses
+description: What each project status means — from Draft through In Progress to Completed — and what to do when sending pauses.
 ---
 
-Every sequence carries a status, shown as a pill on the Sequences list and the sequence detail page.
+Every project carries a status, shown as a pill on the Projects list and the project page.
 
 | Status | What it means |
 | :---- | :---- |
-| **Draft** | Created but not yet launched. You can still edit all details. |
+| **Draft** | Created but not yet launched. You can still edit everything. |
 | **Preparing** | Getting ready to send — Rose is setting up the outreach. |
-| **In Progress** | Live. Candidates are receiving emails. |
-| **Paused** | Temporarily on hold; can be resumed. |
-| **Completed** | All candidates have received the full sequence. Rose still notifies you if a candidate replies later. |
-| **Cancelled** | Stopped by you. Cancelled sequences are tucked away under a separate section on the list. |
+| **In Progress** | Live. Candidates are moving through the sequence. |
+| **Paused** | On hold. Click **Resume** to carry on. |
+| **Completed** | Every candidate has received the full sequence. Rose still handles replies that arrive later, and adding new candidates resumes the project. |
+| **Cancelled** | Stopped by you. Cancelled projects sit in their own section on the list, and can be archived to hide them. |
+
+## Pausing, resuming and cancelling
+
+Use **Pause** and **Resume** on the project page to hold outreach. **Cancel project** stops any new outreach for good — candidates who were already contacted can still reply.
 
 <Callout kind="warning">
-  Cancelling a sequence after it has launched does not refund credits already used on contacted candidates. See [Billing & Subscription](/billing-and-subscription/credits).
+  Cancelling a project after launch doesn't refund credits already used on contacted candidates. See [Credits](/billing-and-subscription/credits).
 </Callout>
+
+## When sending pauses on its own
+
+Rose pauses a project automatically if it can no longer send safely, and shows a banner explaining why:
+
+- **The mailbox was disconnected.** *Sending is paused: the mailbox this campaign sends from was disconnected.* Click **Reconnect mailbox**, then **Resume**. The project owner also receives an email about it.
+- **No inbox is connected for email steps.** Only the LinkedIn steps go out until the owner connects an inbox.
+
+If something else stops a project from running, the reason appears in the project header so you know what to fix.

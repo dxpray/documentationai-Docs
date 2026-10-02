@@ -128,6 +128,10 @@
                 "icon": "workflow"
               },
               {
+                "title": "Launching a Project",
+                "path": "projects/launching"
+              },
+              {
                 "title": "Project Statuses",
                 "path": "projects/project-statuses",
                 "icon": "tag"
@@ -210,6 +214,14 @@
                 "title": "Integrations",
                 "path": "integrations",
                 "icon": "plug"
+              },
+              {
+                "title": "Mailboxes",
+                "path": "integrations/mailboxes"
+              },
+              {
+                "title": "LinkedIn",
+                "path": "integrations/linkedin"
               },
               {
                 "title": "Scheduling",
