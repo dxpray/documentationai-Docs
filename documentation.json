@@ -55,11 +55,13 @@
               },
               {
                 "title": "Planning Mode",
-                "path": "how-rose-works/planning-mode"
+                "path": "how-rose-works/planning-mode",
+                "icon": "list-checks"
               },
               {
                 "title": "What Rose Can Do",
-                "path": "how-rose-works/skills"
+                "path": "how-rose-works/skills",
+                "icon": "layout-grid"
               },
               {
                 "title": "The Four Roles Rose Plays",
@@ -94,7 +96,8 @@
               },
               {
                 "title": "Calibrating a Search",
-                "path": "finding-candidates/calibration"
+                "path": "finding-candidates/calibration",
+                "icon": "target"
               },
               {
                 "title": "Manual Filters",
@@ -105,22 +108,22 @@
           },
           {
             "group": "Projects",
-            "icon": "folder",
+            "icon": "layers",
             "pages": [
               {
                 "title": "Projects",
                 "path": "projects",
-                "icon": "folder"
+                "icon": "layers"
               },
               {
                 "title": "Creating a Project",
                 "path": "projects/creating-a-project",
-                "icon": "plus"
+                "icon": "folder-plus"
               },
               {
                 "title": "Managing a Project",
                 "path": "projects/managing-a-project",
-                "icon": "list"
+                "icon": "kanban"
               },
               {
                 "title": "The Outreach Sequence",
@@ -129,7 +132,8 @@
               },
               {
                 "title": "Launching a Project",
-                "path": "projects/launching"
+                "path": "projects/launching",
+                "icon": "send"
               },
               {
                 "title": "Project Statuses",
@@ -217,11 +221,13 @@
               },
               {
                 "title": "Mailboxes",
-                "path": "integrations/mailboxes"
+                "path": "integrations/mailboxes",
+                "icon": "mail"
               },
               {
                 "title": "LinkedIn",
-                "path": "integrations/linkedin"
+                "path": "integrations/linkedin",
+                "icon": "linkedin"
               },
               {
                 "title": "Scheduling",

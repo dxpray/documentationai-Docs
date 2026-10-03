@@ -1,22 +1,26 @@
 ---
-title: The Sequence Funnel
-description: The live metrics bar inside each sequence shows how candidates move from contacted to booked.
+title: The Project Funnel
+description: The live pipeline bar inside each project shows how candidates move from shortlisted to booked.
 ---
 
-Every launched sequence has a metrics bar on its detail page. Use the **Show metrics** / **Hide metrics** toggle to expand it.
+At the top of a project's **Leads (CRM)** tab, a pipeline bar shows where every candidate stands. Each stage gets a coloured segment sized to how many candidates are in it, with a count underneath.
 
-## What each metric means
+## What each stage means
 
-| Metric | What it counts |
+| Stage | What it counts |
 | :---- | :---- |
-| **Email not found** | Candidates sourced but without a verified email address |
-| **Contacted** | Candidates who have received outreach and are awaiting a reply |
+| **Shortlisted** | Candidates added to the project who haven't been contacted yet |
+| **In Outreach** | Candidates who are receiving your outreach sequence and haven't replied |
 | **Replied** | Candidates who have replied |
 | **Interested** | Candidates who expressed positive interest |
-| **Booked** | Candidates with a confirmed interview |
-| **Not interested** | Candidates who declined |
+| **Ready to book** | Candidates ready for an interview to be scheduled |
+| **Interviews booked** | Candidates with a booked interview |
 
-For the complete, candidate-by-candidate view — including the **Ready to book** and **Rejected** stages — open the **Leads** tab, where every candidate is grouped by stage. See [Managing a Sequence](/sequences/managing-a-sequence).
+Three more stages sit outside the bar and are hidden by default: **Email not found**, **Not interested**, and **Rejected**. Use **Show stages** above the pipeline to reveal them. See [Managing a Project](/projects/managing-a-project).
+
+## On the Projects page
+
+Each project in your **Projects** list has a smaller version of the same bar in its **Pipeline** column, with a line such as "3 booked of 40". The **Replies** column shows how many candidates have replied and your reply rate for that project.
 
 <Callout kind="info">
   These numbers update live as Rose works, so the bar always reflects the current state of your pipeline.
