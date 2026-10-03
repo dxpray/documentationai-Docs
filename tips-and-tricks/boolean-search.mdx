@@ -1,41 +1,43 @@
 ---
 title: Boolean Search
-description: Use AND, OR, quotation marks, and parentheses to build precise, flexible search queries.
+description: Combine terms with AND and OR in Manual Search to build precise, flexible queries.
 ---
 
-The Role & Title, Keywords, and Company filters support Boolean operators, which let you build more precise and flexible queries.
+In [Manual Search](/finding-candidates/manual-filters), these fields can combine their values with Boolean operators:
 
-## Simple searches — no brackets needed
+- **Current title** and **Past title**
+- **Current company** and **Past company**
+- **Keywords**
 
-When searching within a single category, list terms with `OR` between them:
+## How it works
 
-```
-VP OR "vice president" OR EVP OR SVP
-```
+Add each term as its own chip — type it and press **Enter**. Between every two chips sits a small **OR** pill. Click it to switch it to **AND**, and click again to switch back.
 
-```
-sales OR AE OR "account executive" OR BD OR "business development"
-```
+- **OR** widens the search: a candidate needs to match *any* of the terms.
+- **AND** narrows it: a candidate needs to match *all* of the terms joined by it.
 
-## Use quotation marks for multi-word phrases
+## Simple searches — just use OR
 
-Without quotes, each word is treated independently. Use quotes for an exact phrase:
-
-```
-✓  AE OR "account executive"
-✗  AE OR account executive   (searches for AE, or account, or executive)
-```
-
-## Use brackets to combine categories
-
-Wrap each group in brackets and join with `AND`:
+For alternatives within one idea, leave every pill on OR:
 
 ```
-(manager OR lead OR senior) AND (sales OR account OR BD OR "business development")
+VP  OR  Vice President  OR  EVP  OR  SVP
 ```
 
-This surfaces results like *sales lead*, *BD manager*, or *senior account* — combinations you might not type individually. The same logic applies to skills:
+```
+Account Executive  OR  AE  OR  Business Development
+```
+
+## Combining ideas — mix AND and OR
+
+AND binds tighter than OR, so terms joined by AND are grouped together first. These chips:
 
 ```
-("javascript" OR JS) AND (python OR python3)
+Senior  AND  Sales  OR  Lead  AND  Business Development
 ```
+
+search for *(Senior AND Sales)* **or** *(Lead AND Business Development)*.
+
+<Callout kind="tip">
+  Keep each chip to one term or phrase — **Account Executive** as a single chip, not two. If a combination gets complicated, it's often easier to describe it to Rose in plain language instead.
+</Callout>
