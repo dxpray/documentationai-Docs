@@ -74,6 +74,14 @@
                 "icon": "sliders"
               },
               {
+                "title": "Reply Objectives",
+                "path": "how-rose-works/reply-objectives"
+              },
+              {
+                "title": "Rose Settings",
+                "path": "how-rose-works/rose-settings"
+              },
+              {
                 "title": "Rose's Capabilities",
                 "path": "rose-capabilities",
                 "icon": "wand-sparkles"
@@ -103,6 +111,10 @@
                 "title": "Manual Filters",
                 "path": "finding-candidates/manual-filters",
                 "icon": "sliders-horizontal"
+              },
+              {
+                "title": "Importing Candidates",
+                "path": "finding-candidates/importing-candidates"
               }
             ]
           },
@@ -343,6 +355,10 @@
               {
                 "title": "Getting Started FAQ",
                 "path": "help-center/faq/getting-started"
+              },
+              {
+                "title": "Replies & Objectives",
+                "path": "help-center/faq/replies-and-objectives"
               }
             ]
           },
@@ -354,6 +370,14 @@
               {
                 "title": "Login Issues",
                 "path": "help-center/troubleshooting/login-issues"
+              },
+              {
+                "title": "Project Stopped Sending",
+                "path": "help-center/troubleshooting/sending-paused"
+              },
+              {
+                "title": "Can't Launch a Project",
+                "path": "help-center/troubleshooting/launch-blocked"
               }
             ]
           },
