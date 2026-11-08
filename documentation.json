@@ -59,6 +59,10 @@
                 "icon": "list-checks"
               },
               {
+                "title": "Auto Mode",
+                "path": "how-rose-works/auto-mode"
+              },
+              {
                 "title": "What Rose Can Do",
                 "path": "how-rose-works/skills",
                 "icon": "layout-grid"
