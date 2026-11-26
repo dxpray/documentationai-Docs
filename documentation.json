@@ -399,6 +399,59 @@
         ]
       },
       {
+        "tab": "API",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "Overview",
+                "path": "api/overview",
+                "icon": "book-open"
+              },
+              {
+                "title": "Authentication",
+                "path": "api/authentication",
+                "icon": "key"
+              },
+              {
+                "title": "Quickstart",
+                "path": "api/quickstart",
+                "icon": "play"
+              }
+            ]
+          },
+          {
+            "group": "Guides",
+            "icon": "compass",
+            "pages": [
+              {
+                "title": "Searching for Candidates",
+                "path": "api/searching",
+                "icon": "search"
+              },
+              {
+                "title": "API Credits",
+                "path": "api/credits",
+                "icon": "coins"
+              },
+              {
+                "title": "Errors and Limits",
+                "path": "api/errors",
+                "icon": "triangle-alert"
+              }
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "icon": "terminal",
+            "openapi": "api/openapi.yaml"
+          }
+        ]
+      },
+      {
         "tab": "Changelog",
         "icon": "clock",
         "pages": [

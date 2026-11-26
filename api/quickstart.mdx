@@ -1,0 +1,191 @@
+---
+title: Quickstart
+description: Look up a profile, then run a search from a vacancy brief.
+---
+
+You need an API key: see [Authentication](/api/authentication). These examples use `curl`, with the key in an environment variable:
+
+```bash
+export HIROS_API_KEY="ak_your_key"
+```
+
+## Look up a profile
+
+```bash
+curl https://clients.gethiros.com/api/v1/profiles/lookup \
+  -H "Authorization: Bearer $HIROS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"linkedin_url": "https://www.linkedin.com/in/jane-example"}'
+```
+
+```json
+{
+  "matches": [
+    {
+      "linkedin_url": "https://www.linkedin.com/in/jane-example",
+      "full_name": "Jane Example",
+      "headline": "Senior Manager, Financial Services Risk",
+      "location": "London, England, United Kingdom",
+      "current_positions": [
+        {
+          "title": "Senior Manager, Risk Consulting",
+          "company": "Example Advisory LLP",
+          "company_linkedin_url": "https://www.linkedin.com/company/example-advisory",
+          "location": "London, England, United Kingdom",
+          "start_date": "2021-03",
+          "end_date": null,
+          "description": "Lead regulatory change engagements for UK banks and insurers."
+        }
+      ],
+      "experience": [
+        {
+          "title": "Senior Manager, Risk Consulting",
+          "company": "Example Advisory LLP",
+          "company_linkedin_url": "https://www.linkedin.com/company/example-advisory",
+          "location": "London, England, United Kingdom",
+          "start_date": "2021-03",
+          "end_date": null,
+          "description": "Lead regulatory change engagements for UK banks and insurers."
+        },
+        {
+          "title": "Manager, Regulatory Change",
+          "company": "Sample Consulting Ltd",
+          "company_linkedin_url": null,
+          "location": "London, England, United Kingdom",
+          "start_date": "2016-09",
+          "end_date": "2021-02",
+          "description": null
+        }
+      ],
+      "education": [
+        { "school": "University of Example", "degree": "BSc", "field_of_study": "Economics" }
+      ],
+      "skills": ["Regulatory Compliance", "Operational Resilience"],
+      "source": "database",
+      "data_as_of": "2026-11-04T12:15:51+00:00",
+      "match": { "matched_on": "https://www.linkedin.com/in/jane-example", "confidence": 0.98 }
+    }
+  ],
+  "credits_charged": 1
+}
+```
+
+`matches` is empty when nobody was found at the URL, and then nothing is charged. Add `"freshness": "live"` to fetch the profile from LinkedIn now instead.
+
+## Look up many profiles
+
+Send up to 100 URLs from the dataset, or up to 10 live:
+
+```bash
+curl https://clients.gethiros.com/api/v1/profiles/batch \
+  -H "Authorization: Bearer $HIROS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "linkedin_urls": [
+      "https://www.linkedin.com/in/jane-example",
+      "https://www.linkedin.com/in/no-such-person-000",
+      "not a url"
+    ],
+    "freshness": "database"
+  }'
+```
+
+```json
+{
+  "results": [
+    { "linkedin_url": "https://www.linkedin.com/in/jane-example", "status": "found", "profile": { "full_name": "Jane Example" } },
+    { "linkedin_url": "https://www.linkedin.com/in/no-such-person-000", "status": "not_found" },
+    { "linkedin_url": "not a url", "status": "invalid" }
+  ],
+  "credits_charged": 1
+}
+```
+
+The `profile` is shortened here; it holds the full profile. Results come back in the order you sent the URLs, each with the URL exactly as you sent it, and a status:
+
+| `status` | Meaning | Billed |
+| --- | --- | --- |
+| `found` | `profile` holds the profile | Yes |
+| `not_found` | No profile at this URL | No |
+| `invalid` | Not a LinkedIn profile URL | No |
+| `failed` | We couldn't get an answer this time. Retry it, after `retry_after` seconds when that's set | No |
+
+URLs with or without `https://` or `www.`, with a trailing slash or with a query string all work.
+
+## Search from a brief
+
+### 1. Draft the search terms
+
+```bash
+curl https://clients.gethiros.com/api/v1/search-terms \
+  -H "Authorization: Bearer $HIROS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "brief": "Senior Manager, Financial Services Risk Consulting (London)\nLead regulatory change engagements for UK banks and insurers, manage teams of 6 to 10 consultants and own client relationships.\nRequirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.\nNice to have: ACA or CFA, experience selling work."
+  }'
+```
+
+```json
+{
+  "filters": [
+    { "filter_type": "REGION", "type": "in", "value": ["London, England, United Kingdom"] },
+    { "filter_type": "YEARS_OF_EXPERIENCE", "type": "in", "value": ["8+"] }
+  ],
+  "query": "Senior Manager, Financial Services Risk Consulting (London)\nLead regulatory change engagements for UK banks and insurers, ...",
+  "rationale": "This search looks for financial services risk and regulatory consultants based in London with at least eight years' experience, ranked on regulatory change delivery, consultancy level and the nice-to-haves.",
+  "estimated_total": 2277694
+}
+```
+
+This is free, and usually takes a few seconds. `rationale` is a sentence you can show a recruiter. `estimated_total` is how many people the filters find before ranking, so it's the size of the pool, not the number of good matches.
+
+You can also send up to 5 CVs or profiles of people who fit, as `"examples": [{ "text": "…", "full_name": "…" }]`. The name is used only to remove it from the text before it's read.
+
+### 2. Run the search
+
+Send the filters and query back, as they are or edited:
+
+```bash
+curl https://clients.gethiros.com/api/v1/searches \
+  -H "Authorization: Bearer $HIROS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "filters": [
+      { "filter_type": "REGION", "type": "in", "value": ["London, England, United Kingdom"] },
+      { "filter_type": "YEARS_OF_EXPERIENCE", "type": "in", "value": ["8+"] }
+    ],
+    "query": "Senior Manager, Financial Services Risk Consulting (London)\nRequirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.\nNice to have: ACA or CFA, experience selling work.",
+    "limit": 25
+  }'
+```
+
+```json
+{
+  "candidates": [
+    {
+      "linkedin_url": "https://www.linkedin.com/in/jane-example",
+      "full_name": "Jane Example",
+      "relevance": {
+        "fit": "strong",
+        "requirements": [
+          { "requirement": "is located in London", "importance": "required", "verdict": "met" },
+          { "requirement": "has 8 or more years of experience in risk or regulatory consulting", "importance": "required", "verdict": "met" },
+          { "requirement": "has an ACA or CFA qualification", "importance": "nice_to_have", "verdict": "met" },
+          { "requirement": "has experience selling work", "importance": "nice_to_have", "verdict": "unknown" }
+        ]
+      }
+    }
+  ],
+  "next_cursor": "eyJwYWdlIjoyfQ",
+  "total_count": 2277694,
+  "credits_charged": 25
+}
+```
+
+This shows one of the 25 candidates, shortened: each is a full profile plus `relevance`. Candidates come best match first, at 1 credit each.
+
+### 3. Get the next page
+
+Send the same `filters` and `query` again, with `"cursor"` set to the `next_cursor` you got. `next_cursor` is `null` on the last page.
+
+[Searching for candidates](/api/searching) explains filters, the query and `relevance` in full.

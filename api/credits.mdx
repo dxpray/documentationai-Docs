@@ -1,0 +1,41 @@
+---
+title: API credits
+description: What each request costs, and how repeats and retries are billed.
+---
+
+API requests use the same credits as the Hiros app. They come out of the allowance of the person the API key belongs to: see [Credits](/billing-and-subscription/credits) for how allowances work.
+
+## What costs credits
+
+| Request | Cost |
+| --- | --- |
+| A profile found in the dataset (`"freshness": "database"`) | 1 credit |
+| A profile fetched live (`"freshness": "live"`) | 2 credits |
+| A candidate returned by `/searches` | 1 credit |
+| Drafting search terms with `/search-terms` | Free |
+| A URL that is `not_found`, `invalid` or `failed` | Free |
+
+Every response that can cost credits says how many it did in `credits_charged`.
+
+## Repeats are billed once a day
+
+The same person at the same freshness costs your organisation once a day (UTC), whichever endpoint returned them. So:
+
+- Retrying a request that timed out doesn't bill you twice.
+- Looking up someone a search returned earlier the same day, from the dataset, isn't billed again.
+- A live lookup is billed separately from a dataset one.
+
+A repeat counts as `0` in `credits_charged`.
+
+## The balance is checked first
+
+Before a request reaches our data provider, Hiros checks that the key's owner could pay for all of it:
+
+- **A lookup or batch:** the number of URLs times the price.
+- **A search:** `limit` credits, the price of a full page.
+
+If they couldn't, the request is refused with `402 insufficient_credits` and nothing is charged. This check counts the whole request even when part of it would be a free repeat, so sending a batch again still needs the balance for all of it.
+
+## When billing is slow
+
+If our billing system is slow to confirm a charge, `credits_charged` shows the most the request can have cost rather than a figure we can't confirm. The balance in Hiros shows what was actually charged.

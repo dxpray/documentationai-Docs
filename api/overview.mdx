@@ -1,0 +1,65 @@
+---
+title: Hiros API
+description: Look up LinkedIn profiles and search for candidates from your own systems.
+---
+
+The Hiros API lets your own systems, such as your CRM, do two things Hiros does in the app:
+
+- **Look up profiles.** Send LinkedIn profile URLs and get each person's profile back, from our dataset or fetched live from LinkedIn.
+- **Search for candidates.** Send a vacancy brief and get search terms back. Run the search, as drafted or after editing it, and get pages of candidates, each with how well they meet the brief.
+
+## Base URL
+
+```text
+https://clients.gethiros.com/api/v1
+```
+
+Every endpoint takes a JSON body over `POST` and answers in JSON. Send `Content-Type: application/json`, and your API key in the `Authorization` header (see [Authentication](/api/authentication)).
+
+## Endpoints
+
+| Endpoint | What it does | Cost |
+| --- | --- | --- |
+| `POST /profiles/lookup` | One profile, by LinkedIn URL | 1 credit from the dataset, 2 live, when found |
+| `POST /profiles/batch` | Up to 100 profiles from the dataset, or 10 live | The same, per profile found |
+| `POST /search-terms` | Search terms drafted from a brief | Free |
+| `POST /searches` | A page of candidates for a search | 1 credit per candidate returned |
+
+[Quickstart](/api/quickstart) walks through each one.
+
+## Dataset or live
+
+Lookups take a `freshness`:
+
+- `database` (the default): our dataset, which refreshes each profile about once a month. Fast, and 1 credit a profile.
+- `live`: fetched from LinkedIn now, which takes a few seconds a profile. 2 credits a profile.
+
+Search results always come from the dataset. To refresh a candidate you found, look them up with `"freshness": "live"`.
+
+## The profile
+
+Every endpoint returns people in the same shape.
+
+| Field | What it holds |
+| --- | --- |
+| `linkedin_url` | The profile's URL, as `https://www.linkedin.com/in/<name>` |
+| `full_name`, `headline`, `location` | As on the profile |
+| `current_positions` | The roles in `experience` with no end date |
+| `experience` | Every role, current ones included, newest start first. Each has `title`, `company`, `company_linkedin_url`, `location`, `start_date`, `end_date` and `description` |
+| `education` | Each with `school`, `degree` and `field_of_study` |
+| `skills` | The skills listed on the profile |
+| `source` | `database` or `live` |
+| `data_as_of` | When the data was true at source: when our dataset last refreshed the record, or when it was fetched live. `null` when the source didn't say |
+| `match` | `matched_on`, the LinkedIn URL the profile was matched on, and `confidence`, the data provider's confidence in the match from 0 to 1, or `null` when it gives none |
+
+Every field is always present: text we don't have is `null`, and a list we don't have is empty. Dates are `YYYY-MM-DD`, or `YYYY-MM` when only the month is known, and `end_date` is `null` while a role is current.
+
+Profiles never include contact details: no email addresses or phone numbers.
+
+<Callout kind="tip">
+  Compare `data_as_of` with the date on your own record to see which one is newer.
+</Callout>
+
+## Changes within v1
+
+We may add fields to responses, and optional fields to requests, without changing the version. Build your client to ignore fields it doesn't know.

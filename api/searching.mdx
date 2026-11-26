@@ -1,0 +1,102 @@
+---
+title: Searching for candidates
+description: How search terms, filters, the ranking query and relevance work.
+---
+
+A search has two parts:
+
+- **Filters** decide who is eligible. Every candidate meets every filter.
+- **The query** ranks the eligible people, best match first. It never removes anyone.
+
+`/search-terms` drafts both from a brief, and `/searches` runs them and returns candidates a page at a time. You can edit the draft in between.
+
+## What a drafted search looks like
+
+The draft keeps its filters broad and puts the detail in the query:
+
+- **Filters** on where people are based (`REGION`) and, when the brief sets a minimum, their total years of experience (`YEARS_OF_EXPERIENCE`).
+- **The query** is the brief itself, cut down to the person wanted: the role, what it involves, its requirements and its nice-to-haves, in the brief's own words. The company's background, pay and how to apply are left out.
+
+This is deliberate. A filter on a job title or a skill only matches people whose profile uses those exact words, so it leaves out good people who describe the same work differently. In one of our tests, adding title and skill filters cut a pool of over 100,000 people down to three. The query reads for meaning, so a requirement placed there ranks people rather than excluding them.
+
+You can still add filters before you run the search.
+
+## Filters
+
+Each filter is an object:
+
+```json
+{ "filter_type": "REGION", "type": "in", "value": ["London, England, United Kingdom"] }
+```
+
+- `value` lists alternatives: a person matches the filter when any one of them matches.
+- `type` is `in` (the default) to keep the people who match, or `not in` to remove them.
+- A search takes 1 to 15 filters, each with up to 60 values.
+
+### Values come from the search dictionary
+
+Filter values must be entries in the search dictionary, spelled its way: `"London, England, United Kingdom"`, not `"London"`. `/searches` checks every value. When one isn't an entry, it refuses the search with `422 invalid_filters` and names the closest entries it has:
+
+```json
+{
+  "error": {
+    "code": "invalid_filters",
+    "message": "REGION \"Londn\" is not in the search dictionary. The closest entries are \"London, England, United Kingdom\", \"London, Ontario, Canada\"."
+  }
+}
+```
+
+Each problem is on its own line of `message`. Nothing is dropped without telling you: fix the value and send the search again.
+
+### Filter types
+
+These are the types most searches need. A type `/searches` doesn't accept is refused with `422 invalid_filters`.
+
+| `filter_type` | Matches |
+| --- | --- |
+| `REGION` | Where the person is based, such as `"London, England, United Kingdom"` |
+| `YEARS_OF_EXPERIENCE` | Total years of experience: `"8+"` or `"8"` for at least 8, `"3-5"` for 3 to 5 |
+| `YEARS_IN_CURRENT_POSITION` | Years in their current role, in the same format. It restarts on a promotion |
+| `CURRENT_TITLE`, `PAST_TITLE` | A job title now, or in an earlier role |
+| `CURRENT_COMPANY`, `PAST_COMPANY` | An employer now, or an earlier one |
+| `INDUSTRY` | The industry of their current employer |
+| `SENIORITY_LEVEL` | Their current seniority, from a fixed list |
+| `FUNCTION` | Their current function, such as finance or sales, from a fixed list |
+| `SKILL` | A skill listed on the profile |
+| `SCHOOL` | Where they studied |
+
+For the types with a fixed list, a value that isn't on it is refused with the whole list in the message.
+
+## The query
+
+- Describe the person you want, in up to 2,000 characters. The brief's own wording works well, including labels such as "Requirements:" and "Nice to have:".
+- Write only what you want. The query is matched by likeness and reads no negation, so "not a contractor" would rank contractors higher. `/searches` refuses a query that says "not", "without", "rather than", "instead of" or "avoid" with `422 invalid_filters`. To rule people out, use a `not in` filter.
+- The search reads at most 8 requirements from the query, so lead with what matters most.
+
+## Relevance
+
+Each candidate carries `relevance`: how well they meet the search.
+
+```json
+"relevance": {
+  "fit": "strong",
+  "requirements": [
+    { "requirement": "is located in London", "importance": "required", "verdict": "met" },
+    { "requirement": "has strong knowledge of PRA/FCA regulation", "importance": "important", "verdict": "met" },
+    { "requirement": "has experience selling work", "importance": "nice_to_have", "verdict": "unknown" }
+  ]
+}
+```
+
+- `requirements` are what the search read from your query, each with its `importance` (`required`, `important` or `nice_to_have`) and a `verdict`: `met`, `partly_met`, `not_met`, or `unknown` when the profile doesn't say either way.
+- `fit` is an overall tier: `strong`, `possible` or `weak`. It moves with how the query is worded, so the same person can be `strong` for one wording and `possible` for another. The requirements are the reasons to read.
+- Now and then a page comes back without a judgement: `fit` is `null` and `requirements` is empty. The candidates are still in ranked order, and running the same search again usually brings the judgement back.
+
+## Pages
+
+- `limit` is the page size: 1 to 50, 25 by default. You need credits for a full page before the search runs, and you pay only for the candidates returned.
+- For the next page, send the same `filters` and `query` with `cursor` set to the `next_cursor` you got. A cursor only works with the search it came from: with other filters or another query, it's refused with `400 invalid_request`.
+- `next_cursor` is `null` on the last page.
+- `total_count` is how many people the filters find.
+
+Search results come from our dataset. To refresh a candidate before you contact them, look them up with `"freshness": "live"` (see [Quickstart](/api/quickstart)).

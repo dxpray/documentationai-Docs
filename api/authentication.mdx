@@ -1,0 +1,41 @@
+---
+title: Authentication
+description: Send your API key with every request.
+---
+
+Every request needs your API key in the `Authorization` header:
+
+```text
+Authorization: Bearer ak_your_key
+```
+
+## Getting a key
+
+Hiros issues API keys on request. Ask your Hiros contact, or write to [support@gethiros.com](mailto:support@gethiros.com).
+
+Each key belongs to one person in your organisation and acts as them:
+
+- **Credits** come out of that person's allowance, as if they had used Hiros themselves. See [API credits](/api/credits).
+- **The key works only while they're a member** of your organisation. Remove them from the organisation and their key stops working on its next request.
+
+The key decides which organisation a request is for, so no request takes an organisation or user ID.
+
+## Keeping a key safe
+
+- Keep the key on your servers. Never put it in a web page, a mobile app or a code repository.
+- If a key may have been exposed, write to [support@gethiros.com](mailto:support@gethiros.com) and we'll revoke it. A revoked key stops working within about a minute.
+
+## When a key is refused
+
+A missing, malformed, revoked or unknown key gets the same answer: `401` with the code `unauthorized`.
+
+```json
+{
+  "error": {
+    "code": "unauthorized",
+    "message": "A valid API key is required in the Authorization header: \"Bearer ak_…\"."
+  }
+}
+```
+
+The answer doesn't say why the key was refused. If a key that worked starts getting `401`, check that its owner is still a member of your organisation, then contact us.

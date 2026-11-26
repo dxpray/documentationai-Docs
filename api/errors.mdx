@@ -1,0 +1,60 @@
+---
+title: Errors and limits
+description: Error codes, rate limits, timeouts and when to retry.
+---
+
+## The error shape
+
+Every error has the same shape:
+
+```json
+{
+  "error": {
+    "code": "rate_limited",
+    "message": "Too many profile requests for now. Retry after the Retry-After interval."
+  }
+}
+```
+
+Branch on `code`, which stays the same. `message` is written for people and may change.
+
+## Error codes
+
+| Status | `code` | Meaning | What to do |
+| --- | --- | --- | --- |
+| 400 | `invalid_request` | The body isn't a JSON object, a field is missing or not valid, `linkedin_url` isn't a LinkedIn profile URL, or a `/searches` cursor belongs to another search. The message names each problem | Fix the request |
+| 401 | `unauthorized` | The API key is missing or not valid | See [Authentication](/api/authentication) |
+| 402 | `insufficient_credits` | The key's owner doesn't have enough credits for the whole request. Nothing was charged | Add credits, or send a smaller request |
+| 413 | `payload_too_large` | The body is over 64 KB, or 256 KB for `/search-terms` | Send less in one request |
+| 422 | `unprocessable_brief` | `/search-terms` couldn't turn the brief into a search | Say more about the role, where people should be based and the seniority |
+| 422 | `invalid_filters` | `/searches` can't run a filter or the query. The message lists each problem | See [Searching for candidates](/api/searching) |
+| 429 | `rate_limited` | Too many requests for now | Retry after the `Retry-After` header's seconds |
+| 500 | `internal_error` | Something went wrong on our side | Retry shortly |
+| 502 | `provider_error` | One of our data or model providers couldn't answer | Retry shortly |
+| 503 | `maintenance` | Hiros is down for maintenance | Retry later |
+
+## Partial success in a batch
+
+`/profiles/batch` answers `200` when any URL got through, with a status for each URL. A URL we couldn't get an answer for is `failed`. It's free, and carries `retry_after` when we know how long to wait. The whole request fails only when no URL got through: with `429` when that was a rate limit, and `502` otherwise.
+
+## Rate limits
+
+Each API key has its own per-minute limit for each kind of request: dataset lookups, live lookups, search terms and searches. Over a limit, you get `429` with a `Retry-After` header.
+
+Live lookups also depend on a data provider with a tight per-minute limit, so they're the most likely to get `429`. Send live URLs in batches of up to 10 rather than one at a time: a batch counts as one request.
+
+## Timeouts
+
+Some requests take a while, so allow at least this long before your client gives up:
+
+| Endpoint | Allow |
+| --- | --- |
+| `/profiles/lookup` and `/profiles/batch` | 2 minutes |
+| `/search-terms` | 3 minutes |
+| `/searches` | 2 minutes |
+
+Most requests answer much sooner. A live lookup takes a few seconds a profile, about 30 seconds for a batch of 10, and drafting search terms usually takes under 10 seconds.
+
+## Retrying
+
+Retry `429`, `500`, `502` and `503`, waiting longer each time, and at least the `Retry-After` seconds when they're sent. Retries are safe: a profile already billed today isn't billed again (see [API credits](/api/credits)).

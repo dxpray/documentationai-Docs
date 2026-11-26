@@ -1,0 +1,809 @@
+openapi: 3.1.0
+info:
+  title: Hiros API
+  version: "1"
+  description: >-
+    Look up LinkedIn profiles, and search for candidates from a vacancy brief.
+    Every endpoint takes a JSON body over POST and answers in JSON.
+servers:
+  - url: https://clients.gethiros.com/api/v1
+security:
+  - apiKey: []
+tags:
+  - name: Profiles
+    description: Profiles by LinkedIn URL, from our dataset or fetched live.
+  - name: Search
+    description: Search terms from a brief, then pages of candidates.
+paths:
+  /profiles/lookup:
+    post:
+      tags: [Profiles]
+      operationId: lookupProfile
+      summary: Look up a profile
+      description: >-
+        Returns the profile behind one LinkedIn URL. `matches` is empty when
+        no profile was found, which is free. A found profile costs 1 credit
+        from the dataset or 2 credits live.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LookupRequest"
+            example:
+              linkedin_url: https://www.linkedin.com/in/jane-example
+              freshness: database
+      responses:
+        "200":
+          description: The profile, or no match.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LookupResponse"
+              example:
+                matches:
+                  - linkedin_url: https://www.linkedin.com/in/jane-example
+                    full_name: Jane Example
+                    headline: Senior Manager, Financial Services Risk
+                    location: London, England, United Kingdom
+                    current_positions:
+                      - title: Senior Manager, Risk Consulting
+                        company: Example Advisory LLP
+                        company_linkedin_url: https://www.linkedin.com/company/example-advisory
+                        location: London, England, United Kingdom
+                        start_date: "2021-03"
+                        end_date: null
+                        description: Lead regulatory change engagements for UK banks and insurers.
+                    experience:
+                      - title: Senior Manager, Risk Consulting
+                        company: Example Advisory LLP
+                        company_linkedin_url: https://www.linkedin.com/company/example-advisory
+                        location: London, England, United Kingdom
+                        start_date: "2021-03"
+                        end_date: null
+                        description: Lead regulatory change engagements for UK banks and insurers.
+                      - title: Manager, Regulatory Change
+                        company: Sample Consulting Ltd
+                        company_linkedin_url: null
+                        location: London, England, United Kingdom
+                        start_date: "2016-09"
+                        end_date: "2021-02"
+                        description: null
+                    education:
+                      - school: University of Example
+                        degree: BSc
+                        field_of_study: Economics
+                    skills: ["Regulatory Compliance", "Operational Resilience"]
+                    source: database
+                    data_as_of: "2026-11-04T12:15:51+00:00"
+                    match:
+                      matched_on: https://www.linkedin.com/in/jane-example
+                      confidence: 0.98
+                credits_charged: 1
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/InsufficientCredits"
+        "413":
+          $ref: "#/components/responses/PayloadTooLarge"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/InternalError"
+        "502":
+          $ref: "#/components/responses/ProviderError"
+        "503":
+          $ref: "#/components/responses/Maintenance"
+  /profiles/batch:
+    post:
+      tags: [Profiles]
+      operationId: lookupProfilesBatch
+      summary: Look up many profiles
+      description: >-
+        Returns a result for each LinkedIn URL sent, in the order sent: up to
+        100 URLs from the dataset, or up to 10 fetched live. Each URL has its
+        own status. The request succeeds (200) when any URL got through; it
+        fails as a whole only when none did.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchRequest"
+            example:
+              linkedin_urls:
+                - https://www.linkedin.com/in/jane-example
+                - https://www.linkedin.com/in/no-such-person-000
+                - not a url
+              freshness: database
+      responses:
+        "200":
+          description: One result per URL sent.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchResponse"
+              example:
+                results:
+                  - linkedin_url: https://www.linkedin.com/in/jane-example
+                    status: found
+                    profile:
+                      linkedin_url: https://www.linkedin.com/in/jane-example
+                      full_name: Jane Example
+                      headline: Senior Manager, Financial Services Risk
+                      location: London, England, United Kingdom
+                      current_positions:
+                        - title: Senior Manager, Risk Consulting
+                          company: Example Advisory LLP
+                          company_linkedin_url: https://www.linkedin.com/company/example-advisory
+                          location: London, England, United Kingdom
+                          start_date: "2021-03"
+                          end_date: null
+                          description: Lead regulatory change engagements for UK banks and insurers.
+                      experience:
+                        - title: Senior Manager, Risk Consulting
+                          company: Example Advisory LLP
+                          company_linkedin_url: https://www.linkedin.com/company/example-advisory
+                          location: London, England, United Kingdom
+                          start_date: "2021-03"
+                          end_date: null
+                          description: Lead regulatory change engagements for UK banks and insurers.
+                        - title: Manager, Regulatory Change
+                          company: Sample Consulting Ltd
+                          company_linkedin_url: null
+                          location: London, England, United Kingdom
+                          start_date: "2016-09"
+                          end_date: "2021-02"
+                          description: null
+                      education:
+                        - school: University of Example
+                          degree: BSc
+                          field_of_study: Economics
+                      skills: ["Regulatory Compliance", "Operational Resilience"]
+                      source: database
+                      data_as_of: "2026-11-04T12:15:51+00:00"
+                      match:
+                        matched_on: https://www.linkedin.com/in/jane-example
+                        confidence: 0.98
+                  - linkedin_url: https://www.linkedin.com/in/no-such-person-000
+                    status: not_found
+                  - linkedin_url: not a url
+                    status: invalid
+                credits_charged: 1
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/InsufficientCredits"
+        "413":
+          $ref: "#/components/responses/PayloadTooLarge"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/InternalError"
+        "502":
+          $ref: "#/components/responses/ProviderError"
+        "503":
+          $ref: "#/components/responses/Maintenance"
+  /search-terms:
+    post:
+      tags: [Search]
+      operationId: draftSearchTerms
+      summary: Draft search terms
+      description: >-
+        Drafts the filters and ranking query of a first search from a vacancy
+        brief and, optionally, up to 5 example CVs or profiles of people who
+        fit. Send them to `/searches` as they are, or edit them first. Free to
+        call. Usually takes a few seconds, and up to 3 minutes.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchTermsRequest"
+            example:
+              brief: |-
+                Senior Manager, Financial Services Risk Consulting (London)
+                Lead regulatory change engagements for UK banks and insurers, manage teams of 6 to 10 consultants and own client relationships.
+                Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.
+                Nice to have: ACA or CFA, experience selling work.
+              examples: []
+      responses:
+        "200":
+          description: The drafted search.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchTermsResponse"
+              example:
+                filters:
+                  - filter_type: REGION
+                    type: in
+                    value: ["London, England, United Kingdom"]
+                  - filter_type: YEARS_OF_EXPERIENCE
+                    type: in
+                    value: ["8+"]
+                query: |-
+                  Senior Manager, Financial Services Risk Consulting (London)
+                  Lead regulatory change engagements for UK banks and insurers, manage teams of 6 to 10 consultants and own client relationships.
+                  Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.
+                  Nice to have: ACA or CFA, experience selling work.
+                rationale: This search looks for financial services risk and regulatory consultants based in London with at least eight years' experience, ranked on regulatory change delivery, consultancy level and the nice-to-haves.
+                estimated_total: 2277694
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "413":
+          $ref: "#/components/responses/PayloadTooLarge"
+        "422":
+          description: >-
+            `unprocessable_brief`: the brief could not be turned into a
+            search. Say more about the role, where the people should be based
+            and the seniority, then retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error:
+                  code: unprocessable_brief
+                  message: We could not turn this brief into a search. Say more about the role, where the people should be based and the seniority, then retry.
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/InternalError"
+        "502":
+          $ref: "#/components/responses/ProviderError"
+        "503":
+          $ref: "#/components/responses/Maintenance"
+  /searches:
+    post:
+      tags: [Search]
+      operationId: runSearch
+      summary: Run a search
+      description: >-
+        Returns one page of candidates, best first. Every candidate meets
+        every filter; the query decides the order. Each candidate comes with
+        how well it meets the search. Costs 1 credit per profile returned.
+        For the next page, send the same filters and query with `cursor` set
+        to the `next_cursor` you got.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+            example:
+              filters:
+                - filter_type: REGION
+                  type: in
+                  value: ["London, England, United Kingdom"]
+                - filter_type: YEARS_OF_EXPERIENCE
+                  type: in
+                  value: ["8+"]
+              query: |-
+                Senior Manager, Financial Services Risk Consulting (London)
+                Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.
+                Nice to have: ACA or CFA, experience selling work.
+              limit: 25
+      responses:
+        "200":
+          description: A page of candidates.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+              example:
+                candidates:
+                  - linkedin_url: https://www.linkedin.com/in/jane-example
+                    full_name: Jane Example
+                    headline: Senior Manager, Financial Services Risk
+                    location: London, England, United Kingdom
+                    current_positions:
+                      - title: Senior Manager, Risk Consulting
+                        company: Example Advisory LLP
+                        company_linkedin_url: https://www.linkedin.com/company/example-advisory
+                        location: London, England, United Kingdom
+                        start_date: "2021-03"
+                        end_date: null
+                        description: Lead regulatory change engagements for UK banks and insurers.
+                    experience:
+                      - title: Senior Manager, Risk Consulting
+                        company: Example Advisory LLP
+                        company_linkedin_url: https://www.linkedin.com/company/example-advisory
+                        location: London, England, United Kingdom
+                        start_date: "2021-03"
+                        end_date: null
+                        description: Lead regulatory change engagements for UK banks and insurers.
+                    education:
+                      - school: University of Example
+                        degree: BSc
+                        field_of_study: Economics
+                    skills: ["Regulatory Compliance", "Operational Resilience"]
+                    source: database
+                    data_as_of: "2026-11-04T12:15:51+00:00"
+                    match:
+                      matched_on: https://www.linkedin.com/in/jane-example
+                      confidence: null
+                    relevance:
+                      fit: strong
+                      requirements:
+                        - requirement: is located in London
+                          importance: required
+                          verdict: met
+                        - requirement: has 8 or more years of experience in risk or regulatory consulting
+                          importance: required
+                          verdict: met
+                        - requirement: has strong knowledge of PRA/FCA regulation
+                          importance: important
+                          verdict: met
+                        - requirement: has an ACA or CFA qualification
+                          importance: nice_to_have
+                          verdict: met
+                        - requirement: has experience selling work
+                          importance: nice_to_have
+                          verdict: unknown
+                next_cursor: eyJwYWdlIjoyfQ
+                total_count: 2277694
+                credits_charged: 1
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/InsufficientCredits"
+        "413":
+          $ref: "#/components/responses/PayloadTooLarge"
+        "422":
+          description: >-
+            `invalid_filters`: a filter or the query cannot be searched. The
+            message names each problem on its own line, with the closest
+            entries the search dictionary has.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error:
+                  code: invalid_filters
+                  message: REGION "Londn" is not in the search dictionary. The closest entries are "London, England, United Kingdom", "London, Ontario, Canada".
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/InternalError"
+        "502":
+          $ref: "#/components/responses/ProviderError"
+        "503":
+          $ref: "#/components/responses/Maintenance"
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: "Your Hiros API key, sent as `Authorization: Bearer ak_…`."
+  schemas:
+    Freshness:
+      type: string
+      enum: [database, live]
+      description: >-
+        `database`: our dataset, refreshed about once a month. `live`: fetched
+        from LinkedIn now, slower and twice the price.
+    LookupRequest:
+      type: object
+      required: [linkedin_url]
+      properties:
+        linkedin_url:
+          type: string
+          maxLength: 512
+          description: A LinkedIn profile URL, such as `https://www.linkedin.com/in/<name>`.
+        freshness:
+          $ref: "#/components/schemas/Freshness"
+          default: database
+    LookupResponse:
+      type: object
+      required: [matches, credits_charged]
+      properties:
+        matches:
+          type: array
+          description: The profiles matching the URL. Empty when none was found; one profile otherwise.
+          items:
+            $ref: "#/components/schemas/Profile"
+        credits_charged:
+          type: integer
+          description: Credits this request was billed. 0 when the profile was not found, or was already billed today.
+    BatchRequest:
+      type: object
+      required: [linkedin_urls]
+      properties:
+        linkedin_urls:
+          type: array
+          minItems: 1
+          maxItems: 100
+          description: Up to 100 URLs for `database`, up to 10 for `live`.
+          items:
+            type: string
+            maxLength: 512
+        freshness:
+          $ref: "#/components/schemas/Freshness"
+          default: database
+    BatchResponse:
+      type: object
+      required: [results, credits_charged]
+      properties:
+        results:
+          type: array
+          description: One result per URL sent, in the order sent. A URL sent twice gets two results and is billed once.
+          items:
+            $ref: "#/components/schemas/LookupResult"
+        credits_charged:
+          type: integer
+          description: Credits this request was billed.
+    LookupResult:
+      type: object
+      required: [linkedin_url, status]
+      properties:
+        linkedin_url:
+          type: string
+          description: The URL exactly as you sent it.
+        status:
+          type: string
+          enum: [found, not_found, invalid, failed]
+          description: >-
+            `found`: `profile` is set. `not_found`: no profile at this URL.
+            `invalid`: not a LinkedIn profile URL. `failed`: we could not get
+            an answer this time; retry it. Only `found` is billed.
+        profile:
+          $ref: "#/components/schemas/Profile"
+        retry_after:
+          type: integer
+          description: For a `failed` URL, the seconds to wait before retrying, when known.
+    Profile:
+      type: object
+      description: >-
+        A person. Every field is always present: text we don't have is
+        `null`, and lists we don't have are empty. No contact details (emails
+        or phone numbers) are ever included.
+      required: [linkedin_url, full_name, headline, location, current_positions, experience, education, skills, source, data_as_of, match]
+      properties:
+        linkedin_url:
+          type: string
+          description: The profile's URL, in the form `https://www.linkedin.com/in/<name>`.
+        full_name:
+          type: string
+        headline:
+          type: [string, "null"]
+        location:
+          type: [string, "null"]
+        current_positions:
+          type: array
+          description: The roles in `experience` with no end date.
+          items:
+            $ref: "#/components/schemas/Position"
+        experience:
+          type: array
+          description: Every role, current ones included, newest start first.
+          items:
+            $ref: "#/components/schemas/Position"
+        education:
+          type: array
+          items:
+            $ref: "#/components/schemas/Education"
+        skills:
+          type: array
+          items:
+            type: string
+        source:
+          $ref: "#/components/schemas/Freshness"
+        data_as_of:
+          type: [string, "null"]
+          format: date-time
+          description: >-
+            When this data was true at source. For `database`, when our
+            dataset last refreshed the record; for `live`, when it was
+            fetched. `null` when the source did not say.
+        match:
+          type: object
+          required: [matched_on, confidence]
+          properties:
+            matched_on:
+              type: string
+              description: The LinkedIn URL the profile was matched on.
+            confidence:
+              type: [number, "null"]
+              minimum: 0
+              maximum: 1
+              description: The data provider's confidence in the match, when it gives one. Always `null` on search results.
+    Position:
+      type: object
+      required: [title, company, company_linkedin_url, location, start_date, end_date, description]
+      properties:
+        title:
+          type: [string, "null"]
+        company:
+          type: [string, "null"]
+        company_linkedin_url:
+          type: [string, "null"]
+        location:
+          type: [string, "null"]
+        start_date:
+          type: [string, "null"]
+          description: "`YYYY-MM-DD`, or `YYYY-MM` when only the month is known."
+        end_date:
+          type: [string, "null"]
+          description: Same format. `null` while the role is current.
+        description:
+          type: [string, "null"]
+    Education:
+      type: object
+      required: [school, degree, field_of_study]
+      properties:
+        school:
+          type: string
+        degree:
+          type: [string, "null"]
+        field_of_study:
+          type: [string, "null"]
+    SearchTermsRequest:
+      type: object
+      required: [brief]
+      properties:
+        brief:
+          type: string
+          maxLength: 20000
+          description: The vacancy brief or job description, as plain text.
+        examples:
+          type: array
+          maxItems: 5
+          default: []
+          description: CVs or profiles of people who fit, as plain text.
+          items:
+            type: object
+            required: [text]
+            properties:
+              text:
+                type: string
+                maxLength: 5000
+              full_name:
+                type: string
+                maxLength: 200
+                description: The person's name. Used only to remove it from `text` before it is read; never stored or sent on.
+    SearchTermsResponse:
+      type: object
+      required: [filters, query, rationale, estimated_total]
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: "#/components/schemas/Filter"
+        query:
+          type: string
+          description: The ranking query, cut down from the brief.
+        rationale:
+          type: string
+          description: A sentence or two on what the search looks for, to show a recruiter.
+        estimated_total:
+          type: [integer, "null"]
+          description: >-
+            How many people the filters find: the pool the query ranks, not
+            the number of good matches. `null` when it could not be counted
+            in time.
+    Filter:
+      type: object
+      required: [filter_type, value]
+      properties:
+        filter_type:
+          type: string
+          description: The field to filter on, such as `REGION` or `YEARS_OF_EXPERIENCE`. See Searching for candidates.
+        type:
+          type: string
+          enum: [in, not in]
+          default: in
+          description: "`in` keeps people who match any value; `not in` removes them."
+        value:
+          type: array
+          maxItems: 60
+          description: Entries from the search dictionary. Any one of them matches.
+          items:
+            type: string
+            maxLength: 200
+    SearchRequest:
+      type: object
+      required: [filters, query]
+      properties:
+        filters:
+          type: array
+          minItems: 1
+          maxItems: 15
+          description: Who is eligible. Every candidate meets every filter.
+          items:
+            $ref: "#/components/schemas/Filter"
+        query:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: >-
+            How to rank the eligible people: a description of the person
+            wanted, in positive statements. A query that says what is not
+            wanted ("not", "without", "rather than") is refused.
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 25
+          description: Candidates per page. You need credits for a full page.
+        cursor:
+          type: string
+          maxLength: 2048
+          description: The `next_cursor` of the previous page, sent with the same filters and query.
+    SearchResponse:
+      type: object
+      required: [candidates, next_cursor, total_count, credits_charged]
+      properties:
+        candidates:
+          type: array
+          description: Best match first.
+          items:
+            $ref: "#/components/schemas/SearchCandidate"
+        next_cursor:
+          type: [string, "null"]
+          description: Pass it as `cursor` for the next page. `null` on the last page.
+        total_count:
+          type: [integer, "null"]
+          description: How many people the filters find.
+        credits_charged:
+          type: integer
+          description: Credits this request was billed.
+    SearchCandidate:
+      allOf:
+        - $ref: "#/components/schemas/Profile"
+        - type: object
+          required: [relevance]
+          properties:
+            relevance:
+              $ref: "#/components/schemas/Relevance"
+    Relevance:
+      type: object
+      required: [fit, requirements]
+      description: >-
+        How well the candidate meets the search: the requirements read from
+        the query, each with a verdict. When a page comes back unjudged,
+        `fit` is `null` and `requirements` is empty; the order still holds.
+      properties:
+        fit:
+          type: [string, "null"]
+          enum: [strong, possible, weak, null]
+          description: An overall tier. It moves with how the query is worded, so read the requirements for the reasons.
+        requirements:
+          type: array
+          description: Up to 8 requirements read from the query.
+          items:
+            $ref: "#/components/schemas/RequirementCheck"
+    RequirementCheck:
+      type: object
+      required: [requirement, importance, verdict]
+      properties:
+        requirement:
+          type: string
+          description: The requirement, as read from the query.
+        importance:
+          type: string
+          enum: [required, important, nice_to_have]
+        verdict:
+          type: string
+          enum: [met, partly_met, not_met, unknown]
+          description: "`unknown`: the profile doesn't say either way."
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              enum:
+                - invalid_request
+                - unauthorized
+                - insufficient_credits
+                - payload_too_large
+                - unprocessable_brief
+                - invalid_filters
+                - rate_limited
+                - internal_error
+                - provider_error
+                - maintenance
+              description: Stable. Branch on this.
+            message:
+              type: string
+              description: For people. It may change.
+  responses:
+    InvalidRequest:
+      description: "`invalid_request`: the body is not valid, or a `/searches` cursor belongs to another search. The message names each field that failed."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: invalid_request
+              message: "linkedin_urls: Array must contain at least 1 element(s)"
+    Unauthorized:
+      description: "`unauthorized`: the API key is missing or not valid."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: unauthorized
+              message: 'A valid API key is required in the Authorization header: "Bearer ak_…".'
+    InsufficientCredits:
+      description: "`insufficient_credits`: the key's owner doesn't have enough credits for this request. Nothing was charged."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: insufficient_credits
+              message: The key’s owner does not have enough credits for this request.
+    PayloadTooLarge:
+      description: "`payload_too_large`: the body is over 64 KB (256 KB for `/search-terms`)."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: payload_too_large
+              message: The request body must be at most 64 KB.
+    RateLimited:
+      description: "`rate_limited`: too many requests for now. Wait for the `Retry-After` header's seconds, when sent, then retry."
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: rate_limited
+              message: Too many profile requests for now. Retry after the Retry-After interval.
+    InternalError:
+      description: "`internal_error`: something went wrong on our side. Retry shortly."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: internal_error
+              message: Something went wrong on our side. Please retry shortly.
+    ProviderError:
+      description: "`provider_error`: one of our data or model providers could not answer. Retry shortly."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: provider_error
+              message: Our data provider could not answer. Please retry shortly.
+    Maintenance:
+      description: "`maintenance`: Hiros is down for maintenance. Retry shortly."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error:
+              code: maintenance
+              message: Hiros is down for maintenance. Please retry shortly.
