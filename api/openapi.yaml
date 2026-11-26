@@ -205,11 +205,7 @@ paths:
             schema:
               $ref: "#/components/schemas/SearchTermsRequest"
             example:
-              brief: |-
-                Senior Manager, Financial Services Risk Consulting (London)
-                Lead regulatory change engagements for UK banks and insurers, manage teams of 6 to 10 consultants and own client relationships.
-                Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.
-                Nice to have: ACA or CFA, experience selling work.
+              brief: "Senior Manager, Financial Services Risk Consulting (London). Lead regulatory change engagements for UK banks and insurers, manage teams of 6 to 10 consultants and own client relationships. Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation. Nice to have: ACA or CFA, experience selling work."
               examples: []
       responses:
         "200":
@@ -226,11 +222,7 @@ paths:
                   - filter_type: YEARS_OF_EXPERIENCE
                     type: in
                     value: ["8+"]
-                query: |-
-                  Senior Manager, Financial Services Risk Consulting (London)
-                  Lead regulatory change engagements for UK banks and insurers, manage teams of 6 to 10 consultants and own client relationships.
-                  Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.
-                  Nice to have: ACA or CFA, experience selling work.
+                query: "Senior Manager, Financial Services Risk Consulting (London). Lead regulatory change engagements for UK banks and insurers, manage teams of 6 to 10 consultants and own client relationships. Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation. Nice to have: ACA or CFA, experience selling work."
                 rationale: This search looks for financial services risk and regulatory consultants based in London with at least eight years' experience, ranked on regulatory change delivery, consultancy level and the nice-to-haves.
                 estimated_total: 2277694
         "400":
@@ -241,7 +233,7 @@ paths:
           $ref: "#/components/responses/PayloadTooLarge"
         "422":
           description: >-
-            `unprocessable_brief`: the brief could not be turned into a
+            unprocessable_brief: the brief could not be turned into a
             search. Say more about the role, where the people should be based
             and the seniority, then retry.
           content:
@@ -285,10 +277,7 @@ paths:
                 - filter_type: YEARS_OF_EXPERIENCE
                   type: in
                   value: ["8+"]
-              query: |-
-                Senior Manager, Financial Services Risk Consulting (London)
-                Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation.
-                Nice to have: ACA or CFA, experience selling work.
+              query: "Senior Manager, Financial Services Risk Consulting (London). Requirements: 8+ years in risk or regulatory consulting, currently Manager or Senior Manager level at a consultancy, strong knowledge of PRA and FCA regulation. Nice to have: ACA or CFA, experience selling work."
               limit: 25
       responses:
         "200":
@@ -360,7 +349,7 @@ paths:
           $ref: "#/components/responses/PayloadTooLarge"
         "422":
           description: >-
-            `invalid_filters`: a filter or the query cannot be searched. The
+            invalid_filters: a filter or the query cannot be searched. The
             message names each problem on its own line, with the closest
             entries the search dictionary has.
           content:
@@ -658,13 +647,57 @@ components:
           type: integer
           description: Credits this request was billed.
     SearchCandidate:
-      allOf:
-        - $ref: "#/components/schemas/Profile"
-        - type: object
-          required: [relevance]
+      type: object
+      description: A profile, with the same fields as a lookup's, plus `relevance`.
+      required: [linkedin_url, full_name, headline, location, current_positions, experience, education, skills, source, data_as_of, match, relevance]
+      properties:
+        linkedin_url:
+          type: string
+          description: The profile's URL, in the form `https://www.linkedin.com/in/<name>`.
+        full_name:
+          type: string
+        headline:
+          type: [string, "null"]
+        location:
+          type: [string, "null"]
+        current_positions:
+          type: array
+          description: The roles in `experience` with no end date.
+          items:
+            $ref: "#/components/schemas/Position"
+        experience:
+          type: array
+          description: Every role, current ones included, newest start first.
+          items:
+            $ref: "#/components/schemas/Position"
+        education:
+          type: array
+          items:
+            $ref: "#/components/schemas/Education"
+        skills:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+          enum: [database]
+          description: Search results always come from the dataset.
+        data_as_of:
+          type: [string, "null"]
+          format: date-time
+          description: When our dataset last refreshed the record. `null` when the source did not say.
+        match:
+          type: object
+          required: [matched_on, confidence]
           properties:
-            relevance:
-              $ref: "#/components/schemas/Relevance"
+            matched_on:
+              type: string
+              description: The candidate's LinkedIn URL.
+            confidence:
+              type: "null"
+              description: Always `null` on search results.
+        relevance:
+          $ref: "#/components/schemas/Relevance"
     Relevance:
       type: object
       required: [fit, requirements]
@@ -723,7 +756,7 @@ components:
               description: For people. It may change.
   responses:
     InvalidRequest:
-      description: "`invalid_request`: the body is not valid, or a `/searches` cursor belongs to another search. The message names each field that failed."
+      description: "invalid_request: the body is not valid, or a /searches cursor belongs to another search. The message names each field that failed."
       content:
         application/json:
           schema:
@@ -733,7 +766,7 @@ components:
               code: invalid_request
               message: "linkedin_urls: Array must contain at least 1 element(s)"
     Unauthorized:
-      description: "`unauthorized`: the API key is missing or not valid."
+      description: "unauthorized: the API key is missing or not valid."
       content:
         application/json:
           schema:
@@ -743,7 +776,7 @@ components:
               code: unauthorized
               message: 'A valid API key is required in the Authorization header: "Bearer ak_…".'
     InsufficientCredits:
-      description: "`insufficient_credits`: the key's owner doesn't have enough credits for this request. Nothing was charged."
+      description: "insufficient_credits: the key's owner doesn't have enough credits for this request. Nothing was charged."
       content:
         application/json:
           schema:
@@ -753,7 +786,7 @@ components:
               code: insufficient_credits
               message: The key’s owner does not have enough credits for this request.
     PayloadTooLarge:
-      description: "`payload_too_large`: the body is over 64 KB (256 KB for `/search-terms`)."
+      description: "payload_too_large: the body is over 64 KB (256 KB for /search-terms)."
       content:
         application/json:
           schema:
@@ -763,7 +796,7 @@ components:
               code: payload_too_large
               message: The request body must be at most 64 KB.
     RateLimited:
-      description: "`rate_limited`: too many requests for now. Wait for the `Retry-After` header's seconds, when sent, then retry."
+      description: "rate_limited: too many requests for now. Wait for the Retry-After header's seconds, when sent, then retry."
       headers:
         Retry-After:
           description: Seconds to wait before retrying.
@@ -778,7 +811,7 @@ components:
               code: rate_limited
               message: Too many profile requests for now. Retry after the Retry-After interval.
     InternalError:
-      description: "`internal_error`: something went wrong on our side. Retry shortly."
+      description: "internal_error: something went wrong on our side. Retry shortly."
       content:
         application/json:
           schema:
@@ -788,7 +821,7 @@ components:
               code: internal_error
               message: Something went wrong on our side. Please retry shortly.
     ProviderError:
-      description: "`provider_error`: one of our data or model providers could not answer. Retry shortly."
+      description: "provider_error: one of our data or model providers could not answer. Retry shortly."
       content:
         application/json:
           schema:
@@ -798,7 +831,7 @@ components:
               code: provider_error
               message: Our data provider could not answer. Please retry shortly.
     Maintenance:
-      description: "`maintenance`: Hiros is down for maintenance. Retry shortly."
+      description: "maintenance: Hiros is down for maintenance. Retry shortly."
       content:
         application/json:
           schema:
